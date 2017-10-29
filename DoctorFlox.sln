@@ -1,0 +1,64 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27004.2005
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{900005BD-0FC4-4755-B52F-ECE6B81E1C56}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Logic", "Logic", "{0A1F398F-DA61-498C-8EF7-348A06B321DF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{6E46E82E-38AD-4BD0-8770-4ABF1843912B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ui", "Ui", "{06A39AFE-B673-4398-A3BB-2CCE9DA25C05}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests.Logic.Core", "src\Tests\Tests.Logic.Core\Tests.Logic.Core.csproj", "{31F4D5AE-F265-48C2-A106-8A74CA3A4353}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ui.WpfSample", "src\Ui\Ui.WpfSample\Ui.WpfSample.csproj", "{EBDD7360-D04C-48B0-A463-6C5DE5E99301}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logic.Wpf", "src\Logic\Logic.Wpf\Logic.Wpf.csproj", "{4418596E-CED1-4D29-AAE9-AB36A475B8E4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "libs", "libs", "{CB223450-EA6D-4513-9DBE-2BA9CEAA4C46}"
+	ProjectSection(SolutionItems) = preProject
+		libs\System.Windows.Interactivity.dll = libs\System.Windows.Interactivity.dll
+		libs\System.Windows.Interactivity.xml = libs\System.Windows.Interactivity.xml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{A4ED4C71-3350-41DD-A441-FF6BA76161E6}"
+	ProjectSection(SolutionItems) = preProject
+		build\ApplyVersionToAssemblies.ps1 = build\ApplyVersionToAssemblies.ps1
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{31F4D5AE-F265-48C2-A106-8A74CA3A4353}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31F4D5AE-F265-48C2-A106-8A74CA3A4353}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31F4D5AE-F265-48C2-A106-8A74CA3A4353}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31F4D5AE-F265-48C2-A106-8A74CA3A4353}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EBDD7360-D04C-48B0-A463-6C5DE5E99301}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EBDD7360-D04C-48B0-A463-6C5DE5E99301}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EBDD7360-D04C-48B0-A463-6C5DE5E99301}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EBDD7360-D04C-48B0-A463-6C5DE5E99301}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4418596E-CED1-4D29-AAE9-AB36A475B8E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4418596E-CED1-4D29-AAE9-AB36A475B8E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4418596E-CED1-4D29-AAE9-AB36A475B8E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4418596E-CED1-4D29-AAE9-AB36A475B8E4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0A1F398F-DA61-498C-8EF7-348A06B321DF} = {900005BD-0FC4-4755-B52F-ECE6B81E1C56}
+		{6E46E82E-38AD-4BD0-8770-4ABF1843912B} = {900005BD-0FC4-4755-B52F-ECE6B81E1C56}
+		{06A39AFE-B673-4398-A3BB-2CCE9DA25C05} = {900005BD-0FC4-4755-B52F-ECE6B81E1C56}
+		{31F4D5AE-F265-48C2-A106-8A74CA3A4353} = {6E46E82E-38AD-4BD0-8770-4ABF1843912B}
+		{EBDD7360-D04C-48B0-A463-6C5DE5E99301} = {06A39AFE-B673-4398-A3BB-2CCE9DA25C05}
+		{4418596E-CED1-4D29-AAE9-AB36A475B8E4} = {0A1F398F-DA61-498C-8EF7-348A06B321DF}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6673B594-C7C6-412B-B5A3-9797458DAD5A}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/10/nuspec.xsd">
+    <metadata>
+        <id>devdeer.DoctorFlox</id>
+        <version>0.0.2-alpha</version>
+        <title>DoctorFlox</title>
+        <authors>DEVDEER</authors>
+        <owners>DEVDEER</owners>
+        <projectUrl>https://devdeer.com</projectUrl>
+        <iconUrl>https://devdeer.blob.core.windows.net/shared/DVDR_LOGO_64.png</iconUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>An Open Source MVVM framework for .NET Framework.</description>
+        <releaseNotes>Added ICommand related stuff.</releaseNotes>
+        <copyright>DEVDEER UG 2017</copyright>
+        <tags>DEVDEER,MVVM,WPF,.NET</tags>
+    </metadata>
+    <files>
+        <file src="bin\Release\DoctorFlox.Logic.Wpf.dll" target="lib\net461\DoctorFlox.Logic.Wpf.dll" />
+        <file src="bin\Release\System.Windows.Interactivity.dll" target="lib\net461\System.Windows.Interactivity.dll" />
+    </files>
+</package>

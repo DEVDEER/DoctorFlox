@@ -1,0 +1,21 @@
+﻿<Window x:Class="devdeer.DoctorFlox.Ui.WpfSample.ChildWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:mvvm="clr-namespace:devdeer.DoctorFlox.Logic.Wpf;assembly=DoctorFlox.Logic.Wpf"
+        xmlns:local="clr-namespace:devdeer.DoctorFlox.Ui.WpfSample"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:Commands="clr-namespace:devdeer.DoctorFlox.Logic.Wpf.Commands;assembly=DoctorFlox.Logic.Wpf"
+        mc:Ignorable="d"
+        Title="ChildWindow" Height="300" Width="300"
+        DataContext="{Binding ChildViewModel, Source={StaticResource Locator}}">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Closing">
+            <Commands:EventToCommand Command="{Binding WindowClosingCommand}" PassEventArgsToCommand="True" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <Grid>
+        
+    </Grid>
+</Window>

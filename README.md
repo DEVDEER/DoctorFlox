@@ -14,3 +14,6 @@ DoctorFlox is available on [NuGet](https://www.nuget.org/packages/devdeer.Doctor
 
     install-package devdeer.DoctorFlox
 
+## More Info
+
+Be sure to check out our [WiKi](https://github.com/devdeer/DoctorFlox/wiki) for more information.

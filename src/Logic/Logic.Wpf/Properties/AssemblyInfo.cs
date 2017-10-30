@@ -7,4 +7,4 @@
 [assembly: AssemblyProduct("DoctorFlox")]
 [assembly: AssemblyCopyright("Copyright © DEVDEER 2017")]
 [assembly: AssemblyTrademark("DoctorFlox")]
-[assembly: AssemblyVersion("0.0.2.*")]
+[assembly: AssemblyVersion("0.0.3.*")]

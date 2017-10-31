@@ -12,7 +12,7 @@ We are a bunch of Geeks and so Star Trek is kind of a natural source for project
 
 DoctorFlox is available on [NuGet](https://www.nuget.org/packages/devdeer.DoctorFlox). Using NuGet tools just type
 
-    install-package devdeer.DoctorFlox
+    install-package devdeer.DoctorFlox -IncludePrerelease
 
 ## More Info
 

@@ -2,15 +2,15 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/10/nuspec.xsd">
     <metadata>
         <id>devdeer.DoctorFlox</id>
-        <version>0.0.4-alpha</version>
+        <version>0.0.5-alpha</version>
         <title>DoctorFlox</title>
         <authors>DEVDEER</authors>
         <owners>DEVDEER</owners>
         <projectUrl>https://devdeer.com</projectUrl>
-        <iconUrl>https://devdeer.blob.core.windows.net/shared/doctorflox/doctorflox_64.png</iconUrl>
+        <iconUrl>https://devdeer.blob.core.windows.net/shared/DVDR_LOGO_64.png</iconUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>An Open Source MVVM framework for .NET Framework.</description>
-        <releaseNotes>Changed logo for NuGet.</releaseNotes>
+        <releaseNotes>Support for IDataErrorInfo, INotifyDataErrorInfo and ICollectionView is added.</releaseNotes>
         <copyright>DEVDEER UG 2017</copyright>
         <tags>DEVDEER,MVVM,WPF,.NET</tags>
     </metadata>

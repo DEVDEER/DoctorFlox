@@ -16,7 +16,7 @@
     /// <summary>
     /// Base class for a view model.
     /// </summary>
-    public abstract class BaseViewModel : BaseObservableObject, ICleanup
+    public abstract class BaseViewModel : BaseDataModel, ICleanup
     {
         #region member vars
 
@@ -70,7 +70,7 @@
         /// </summary>
         /// <param name="messenger">The messenger to use.</param>
         public BaseViewModel(IMessenger messenger)
-        {
+        {            
             _messenger = messenger;
             PerformConstructorCalls();
         }
@@ -130,7 +130,7 @@
         /// Is called by the <see cref="WindowClosingCommand" />.
         /// </summary>
         /// <remarks>
-        /// Calls <see cref="Cleanup"/> internally.
+        /// Calls <see cref="Cleanup" /> internally.
         /// </remarks>
         public virtual void OnWindowClosing()
         {

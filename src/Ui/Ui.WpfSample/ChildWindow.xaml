@@ -15,7 +15,16 @@
             <Commands:EventToCommand Command="{Binding WindowClosingCommand}" PassEventArgsToCommand="True" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
+    <Window.Resources>
+        <Style TargetType="TextBox">
+            <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}"/>
+        </Style>
+    </Window.Resources>
     <Grid>
-        
+        <StackPanel>
+            <TextBox Text="{Binding Data.Firstname, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True }" />
+            <TextBox Text="{Binding Data.Lastname, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True }" />
+            <TextBox Text="{Binding Data.Age, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True }" />
+        </StackPanel>
     </Grid>
 </Window>

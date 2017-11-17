@@ -1,7 +1,6 @@
 ﻿namespace devdeer.DoctorFlox.Ui.WpfSample
 {
     using System;
-    using System.ComponentModel;
     using System.Linq;
     using System.Windows;
 
@@ -18,6 +17,5 @@
         }
 
         #endregion
-       
     }
 }

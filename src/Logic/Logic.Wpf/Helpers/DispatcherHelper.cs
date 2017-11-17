@@ -16,14 +16,15 @@
         /// Invokes an action asynchronously on the UI thread.
         /// </summary>
         /// <param name="action">The action that must be executed.</param>
+        /// <param name="priority">The priority to use for the dispatcher call (defaults to <see cref="DispatcherPriority.Normal"/>.</param>
         /// <returns>
         /// An object, which is returned immediately after BeginInvoke is called, that can be used to interact
         /// with the delegate as it is pending execution in the event queue.
         /// </returns>
-        public static DispatcherOperation BeginInvoke(Action action)
+        public static DispatcherOperation BeginInvoke(Action action, DispatcherPriority priority = DispatcherPriority.Normal)
         {
             CheckDispatcher();
-            return UiDispatcher.BeginInvoke(action);
+            return UiDispatcher.BeginInvoke(action, priority);
         }
 
         /// <summary>
@@ -77,6 +78,11 @@
             UiDispatcher = Dispatcher.CurrentDispatcher;
         }
 
+        /// <summary>
+        /// Calls <see cref="BeginInvoke"/> and retrieves the underlaying awaitable.
+        /// </summary>
+        /// <param name="action">The action to invoke on the UI thread.</param>
+        /// <returns>The awaitable task of the call.</returns>
         public static Task InvokeAsync(Action action)
         {
             CheckDispatcher();
@@ -92,6 +98,10 @@
             UiDispatcher = null;
         }
 
+        /// <summary>
+        /// Checks if the <see cref="UiDispatcher"/> is set approrpiately (e.g., if <see cref="Initialize"/> was called.
+        /// </summary>
+        /// <exception cref="InvalidOperationException">Is thrown if the <see cref="UiDispatcher"/> is <c>null</c>.</exception>
         private static void CheckDispatcher()
         {
             if (UiDispatcher == null)

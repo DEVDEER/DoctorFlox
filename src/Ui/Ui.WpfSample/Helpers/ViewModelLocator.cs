@@ -20,6 +20,11 @@
         public ChildViewModel ChildViewModel => Variables.AutoFacContainer.Resolve<ChildViewModel>();
 
         /// <summary>
+        /// The view model for the list window.
+        /// </summary>
+        public CollectionViewModel CollectionViewModel => Variables.AutoFacContainer.Resolve<CollectionViewModel>();
+
+        /// <summary>
         /// The view model for the main window.
         /// </summary>
         public MainViewModel MainViewModel => Variables.AutoFacContainer.Resolve<MainViewModel>();

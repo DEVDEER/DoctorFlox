@@ -57,6 +57,12 @@
                     var windowInstance = CreateWindowInstance("ChildWindow");
                     windowInstance?.ShowDialog();
                 });
+            OpenCollectionWindowCommand = new RelayCommand(
+                () =>
+                {
+                    var windowInstance = CreateWindowInstance("CollectionWindow");
+                    windowInstance?.ShowDialog();
+                });
         }
         
         /// <inheritdoc />
@@ -105,6 +111,11 @@
         /// Triggers the opening of a new child window.
         /// </summary>
         public RelayCommand OpenChildWindowCommand { get; private set; }
+
+        /// <summary>
+        /// Triggers the opening of a new collection window.
+        /// </summary>
+        public RelayCommand OpenCollectionWindowCommand { get; private set; }
 
         /// <summary>
         /// Can be used to show a message box.

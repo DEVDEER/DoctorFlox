@@ -9,6 +9,8 @@
     using Logic.Wpf;
     using Logic.Wpf.Interfaces;
 
+    using Models;
+
     /// <summary>
     /// The view model for the child window.
     /// </summary>
@@ -91,6 +93,12 @@
         {
             Trace.TraceInformation($"Called method [{method}].");
         }
+
+        #endregion
+
+        #region properties
+
+        public ChildDataModel Data { get; } = new ChildDataModel();
 
         #endregion
     }

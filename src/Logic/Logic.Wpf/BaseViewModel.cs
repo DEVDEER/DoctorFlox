@@ -187,7 +187,7 @@
         /// <returns>The window instance or <c>null</c> if an error occurs.</returns>
         protected Window CreateWindowInstance(string viewTypeName, bool throwException = true)
         {
-            var viewType = ViewTypeListFactory.Value.FirstOrDefault(t => t.Name.Equals(viewTypeName, StringComparison.Ordinal) || t.FullName.Equals(viewTypeName, StringComparison.Ordinal));
+            var viewType = ViewTypeListFactory.Value.FirstOrDefault(t => t.Name.Equals(viewTypeName, StringComparison.Ordinal) || (t.FullName?.Equals(viewTypeName, StringComparison.Ordinal) ?? false));
             return CreateWindowInstance(viewType, throwException);
         }
 

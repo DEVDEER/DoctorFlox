@@ -30,6 +30,7 @@
             <TextBox Text="{Binding TestMessage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
             <Button Content="Show Message" Command="{Binding ShowMessageCommand}" />
             <Button Content="Show Child" Command="{Binding OpenChildWindowCommand}" />
+            <Button Content="Show List Window" Command="{Binding OpenCollectionWindowCommand}" />
         </StackPanel>
     </Grid>
 </Window>

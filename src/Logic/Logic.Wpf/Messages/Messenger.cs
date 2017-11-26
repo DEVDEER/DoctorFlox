@@ -198,7 +198,7 @@
                 return;
             }
             Action cleanupAction = Cleanup;
-            Dispatcher.CurrentDispatcher.BeginInvoke(cleanupAction, DispatcherPriority.ApplicationIdle, null);
+            DispatcherHelper.BeginInvoke(cleanupAction, DispatcherPriority.ApplicationIdle);
             _isCleanupRegistered = true;
         }
 

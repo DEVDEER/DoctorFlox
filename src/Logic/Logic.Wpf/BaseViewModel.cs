@@ -16,7 +16,7 @@
     /// <summary>
     /// Base class for a view model.
     /// </summary>
-    public abstract class BaseViewModel : BaseObservableObject, ICleanup
+    public abstract class BaseViewModel : BaseDataModel, ICleanup
     {
         #region member vars
 
@@ -70,7 +70,7 @@
         /// </summary>
         /// <param name="messenger">The messenger to use.</param>
         public BaseViewModel(IMessenger messenger)
-        {
+        {            
             _messenger = messenger;
             PerformConstructorCalls();
         }
@@ -130,7 +130,7 @@
         /// Is called by the <see cref="WindowClosingCommand" />.
         /// </summary>
         /// <remarks>
-        /// Calls <see cref="Cleanup"/> internally.
+        /// Calls <see cref="Cleanup" /> internally.
         /// </remarks>
         public virtual void OnWindowClosing()
         {
@@ -187,7 +187,7 @@
         /// <returns>The window instance or <c>null</c> if an error occurs.</returns>
         protected Window CreateWindowInstance(string viewTypeName, bool throwException = true)
         {
-            var viewType = ViewTypeListFactory.Value.FirstOrDefault(t => t.Name.Equals(viewTypeName, StringComparison.Ordinal) || t.FullName.Equals(viewTypeName, StringComparison.Ordinal));
+            var viewType = ViewTypeListFactory.Value.FirstOrDefault(t => t.Name.Equals(viewTypeName, StringComparison.Ordinal) || (t.FullName?.Equals(viewTypeName, StringComparison.Ordinal) ?? false));
             return CreateWindowInstance(viewType, throwException);
         }
 

@@ -2,6 +2,7 @@
 {
     using System;
     using System.ComponentModel;
+    using System.Diagnostics;
     using System.Linq;
     using System.Runtime.CompilerServices;
 
@@ -22,7 +23,7 @@
         /// <summary>
         /// Is called by Fody.PropertyChanged whenever the value of a property changed.
         /// </summary>
-        /// <param name="propertyName">The name of </param>
+        /// <param name="propertyName">The name of the property that changed the value.</param>
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

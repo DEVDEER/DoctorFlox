@@ -111,7 +111,7 @@
                     {
                         continue;
                     }
-                    if (Errors.TryRemove(error.Key, out var outLi))
+                    if (Errors.TryRemove(error.Key, out var _))
                     {
                         OnErrorsChanged(error.Key);
                     }
@@ -152,7 +152,7 @@
                 var validationResults = new List<ValidationResult>();
                 var value = GetType().GetProperty(propertyName, BindingFlags.Instance | BindingFlags.Public)?.GetValue(this);
                 Validator.TryValidateProperty(value, validationContext, validationResults);
-                if (Errors.TryRemove(propertyName, out var rem))
+                if (Errors.TryRemove(propertyName, out var _))
                 {
                     OnErrorsChanged(propertyName);
                 }
@@ -212,11 +212,11 @@
         /// <summary>
         /// Central logic to handle validation results from <see cref="ValidationContext" />.
         /// </summary>
-        /// <param name="validationResults"></param>
+        /// <param name="validationResults">The collected validation results to handle.</param>
         private void HandleValidationResults(IEnumerable<ValidationResult> validationResults)
         {
             // get all results grouped by property names
-            var resultsByPropNames = from res in validationResults from mname in res.MemberNames group res by mname into g select g;
+            var resultsByPropNames = from validationResult in validationResults from memberName in validationResult.MemberNames group validationResult by memberName into g select g;
             foreach (var prop in resultsByPropNames)
             {
                 var messages = prop.Select(r => r.ErrorMessage).ToList();
@@ -259,14 +259,15 @@
         {
             get
             {
-                if (_propertiesToWatch == null)
+                if (_propertiesToWatch != null)
                 {
-                    var result = new List<PropertyInfo>();
-                    result.AddRange(ReflectionHelper.GetPropertiesWithDataErrorInfo(GetType()));
-                    result.AddRange(ReflectionHelper.GetPropertiesWithValidationAttribute(GetType()));
-                    OnBeforeWatchedPropertiesDefined(result);
-                    _propertiesToWatch = result.AsEnumerable();
+                    return _propertiesToWatch;
                 }
+                var result = new List<PropertyInfo>();
+                result.AddRange(ReflectionHelper.GetPropertiesWithDataErrorInfo(GetType()));
+                result.AddRange(ReflectionHelper.GetPropertiesWithValidationAttribute(GetType()));
+                OnBeforeWatchedPropertiesDefined(result);
+                _propertiesToWatch = result.AsEnumerable();
                 return _propertiesToWatch;
             }
         }

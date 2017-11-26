@@ -212,11 +212,11 @@
         /// <summary>
         /// Central logic to handle validation results from <see cref="ValidationContext" />.
         /// </summary>
-        /// <param name="validationResults"></param>
+        /// <param name="validationResults">The collected validation results to handle.</param>
         private void HandleValidationResults(IEnumerable<ValidationResult> validationResults)
         {
             // get all results grouped by property names
-            var resultsByPropNames = from res in validationResults from mname in res.MemberNames group res by mname into g select g;
+            var resultsByPropNames = from validationResult in validationResults from memberName in validationResult.MemberNames group validationResult by memberName into g select g;
             foreach (var prop in resultsByPropNames)
             {
                 var messages = prop.Select(r => r.ErrorMessage).ToList();

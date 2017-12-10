@@ -28,6 +28,7 @@
         <TextBlock Grid.Row="0" Text="{Binding Message}" />
         <StackPanel Grid.Row="1">
             <TextBox Text="{Binding TestMessage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+            <Label Content="{Binding AssociatedView.Title}" />
             <Button Content="Show Message" Command="{Binding ShowMessageCommand}" />
             <Button Content="Show Child" Command="{Binding OpenChildWindowCommand}" />
             <Button Content="Show List Window" Command="{Binding OpenCollectionWindowCommand}" />

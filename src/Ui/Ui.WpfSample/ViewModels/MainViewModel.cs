@@ -14,7 +14,6 @@
     using Logic.Wpf;
     using Logic.Wpf.Commands;
     using Logic.Wpf.Enumerations;
-    using Logic.Wpf.Helpers;
     using Logic.Wpf.Interfaces;
     using Logic.Wpf.Messages;
 
@@ -24,7 +23,7 @@
     public class MainViewModel : BaseViewModel
     {
         #region constructors and destructors
-       
+
         /// <inheritdoc />
         public MainViewModel(IMessenger messenger, SynchronizationContext synchronizationContext) : base(messenger, synchronizationContext)
         {
@@ -50,7 +49,7 @@
         protected override void InitCommands()
         {
             base.InitCommands();
-            ShowMessageCommand = new RelayCommand(() => MessageBox.Show($"You said: {TestMessage}"), () => !string.IsNullOrEmpty(TestMessage));
+            ShowMessageCommand = new RelayCommand(() => ShowMessageBox($"You said: {TestMessage}", "Test Message"), () => !string.IsNullOrEmpty(TestMessage));
             OpenChildWindowCommand = new RelayCommand(
                 () =>
                 {
@@ -64,7 +63,7 @@
                     windowInstance?.ShowDialog();
                 });
         }
-        
+
         /// <inheritdoc />
         protected override void InitData()
         {
@@ -82,7 +81,7 @@
         /// <inheritdoc />
         protected override void InitMessenger()
         {
-            base.InitMessenger();            
+            base.InitMessenger();
             MessengerInstance.Register<DataMessage<MainViewModel, MainViewModel, string>>(
                 this,
                 ThreadCallbackOption.UiThread,

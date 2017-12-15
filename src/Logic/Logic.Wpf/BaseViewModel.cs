@@ -7,7 +7,11 @@
     using System.Threading;
     using System.Windows;
 
+    using Attributes;
+
     using Commands;
+
+    using Helpers;
 
     using Interfaces;
 
@@ -27,22 +31,6 @@
         #endregion
 
         #region constants
-
-        /// <summary>
-        /// Lazy factory for retrieving a list of all currently available types which derive from <see cref="Window" /> in the
-        /// <see cref="AppDomain" />.
-        /// </summary>
-        protected static Lazy<IEnumerable<Type>> ViewTypeListFactory = new Lazy<IEnumerable<Type>>(
-            () =>
-            {
-                var result = new List<Type>();
-                var assemblies = AppDomain.CurrentDomain.GetAssemblies();
-                foreach (var assembly in assemblies)
-                {
-                    result.AddRange(assembly.GetTypes().Where(t => !t.IsAbstract && typeof(Window).IsAssignableFrom(t)));
-                }
-                return result;
-            });
 
         /// <summary>
         /// Defines the singleton logic to determine if this instance is running in designers or at runtime.
@@ -70,7 +58,7 @@
         /// </summary>
         /// <param name="messenger">The messenger to use.</param>
         public BaseViewModel(IMessenger messenger)
-        {            
+        {
             _messenger = messenger;
             PerformConstructorCalls();
         }
@@ -138,6 +126,25 @@
         }
 
         /// <summary>
+        /// Opens a message box with the given options and the <see cref="AssociatedView" /> as the owner and retrieves the result.
+        /// </summary>
+        /// <param name="messageText">The text of the message.</param>
+        /// <param name="caption">The optional caption (defaults to <c>null</c>).</param>
+        /// <param name="button">The buttons to display (defaults to <see cref="MessageBoxButton.OK" />).</param>
+        /// <param name="image">The icon to show (defaults to <see cref="MessageBoxImage.None" />).</param>
+        /// <param name="defaultResult">The default result to take (defaults to <see cref="MessageBoxResult.None" />).</param>
+        /// <returns>The result the user choose.</returns>
+        public virtual MessageBoxResult ShowMessageBox(
+            string messageText,
+            string caption = null,
+            MessageBoxButton button = MessageBoxButton.OK,
+            MessageBoxImage image = MessageBoxImage.None,
+            MessageBoxResult defaultResult = MessageBoxResult.None)
+        {
+            return MessageBox.Show(AssociatedView, messageText, caption, button, image, defaultResult);
+        }
+
+        /// <summary>
         /// Can be overridden to perform logic that should be called after all init-procedures.
         /// </summary>
         /// <remarks>
@@ -148,13 +155,15 @@
         }
 
         /// <summary>
-        /// Uses <see cref="ViewTypeListFactory" /> to search for a given <paramref name="viewType" /> and retrieve an instance of
+        /// Uses <see cref="ReflectionHelper.ViewTypeListFactory" /> to search for a given <paramref name="viewType" /> and
+        /// retrieve an instance of
         /// it.
         /// </summary>
         /// <param name="viewType">The type of the window the caller wants to open.</param>
         /// <param name="throwException"><c>true</c> if this method should throw exceptions (defaults to <c>true</c>).</param>
+        /// <param name="owner">The handle for the owner window.</param>
         /// <returns>The window instance or <c>null</c> if an error occurs.</returns>
-        protected Window CreateWindowInstance(Type viewType, bool throwException = true)
+        protected Window CreateWindowInstance(Type viewType, bool throwException = true, Window owner = null)
         {
             if (viewType == null)
             {
@@ -179,16 +188,61 @@
         }
 
         /// <summary>
-        /// Uses <see cref="ViewTypeListFactory" /> to search for a type with the given <paramref name="viewTypeName" /> and
+        /// Uses <see cref="ReflectionHelper.ViewTypeListFactory" /> to search for a type with the given
+        /// <paramref name="viewTypeName" /> and
         /// retrieve an instance of it.
         /// </summary>
         /// <param name="viewTypeName">The name or full name of the type we are searching for.</param>
         /// <param name="throwException"><c>true</c> if this method should throw exceptions (defaults to <c>true</c>).</param>
+        /// <param name="owner">The handle for the owner window.</param>
         /// <returns>The window instance or <c>null</c> if an error occurs.</returns>
-        protected Window CreateWindowInstance(string viewTypeName, bool throwException = true)
+        protected Window CreateWindowInstance(string viewTypeName, bool throwException = true, Window owner = null)
         {
-            var viewType = ViewTypeListFactory.Value.FirstOrDefault(t => t.Name.Equals(viewTypeName, StringComparison.Ordinal) || (t.FullName?.Equals(viewTypeName, StringComparison.Ordinal) ?? false));
-            return CreateWindowInstance(viewType, throwException);
+            var viewType = ReflectionHelper.GetViewTypeByNameOrFullName(viewTypeName);
+            return viewType == null ? null : CreateWindowInstance(viewType, throwException, owner);
+        }
+
+        /// <summary>
+        /// Searches for a type in all currently opened windows.
+        /// </summary>
+        /// <param name="windowType">The type of the window to search for.</param>
+        /// <returns>The window instance or <c>null</c> if no result was found.</returns>
+        protected Window GetWindowInstance(Type windowType)
+        {
+            foreach (var window in Application.Current.Windows)
+            {
+                if (window.GetType() == windowType)
+                {
+                    return window as Window;
+                }
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// Searches for a type in all currently opened windows.
+        /// </summary>
+        /// <param name="windowTypeName">
+        /// Optional name type of the window to search for. If set to <c>null</c>, the
+        /// <see cref="AssociatedView" /> window will be resolved.
+        /// </param>
+        /// <returns>The window instance or <c>null</c> if no result was found.</returns>
+        protected Window GetWindowInstance(string windowTypeName = null)
+        {
+            if (windowTypeName == null)
+            {
+                // try to return the associated view
+                return AssociatedView;
+            }
+            foreach (var window in Application.Current.Windows)
+            {
+                var type = window.GetType();
+                if (type.Name.Equals(windowTypeName, StringComparison.Ordinal) || (type.FullName ?? string.Empty).Equals(windowTypeName, StringComparison.Ordinal))
+                {
+                    return window as Window;
+                }
+            }
+            return null;
         }
 
         /// <summary>
@@ -277,6 +331,31 @@
         #region properties
 
         /// <summary>
+        /// Tries to retrieve the window associated with this view.
+        /// </summary>
+        /// <remarks>
+        /// This logic tries to find any <see cref="ViewTypeNameAttribute" /> which this type is decorated with. If none is found
+        /// this logic
+        /// assumes that the naming conventions says that view models are using the string 'ViewModel' in their name where views
+        /// will use 'Window'.
+        /// </remarks>
+        public Window AssociatedView
+        {
+            get
+            {
+                var attribute = ViewTypeNameAttribute;
+                if (attribute != null)
+                {
+                    // we have to retrieve the type
+                    return CreateWindowInstance(attribute.ViewType, false);
+                }
+                // try to retrieve type using name conventions
+                var type = ReflectionHelper.GetViewTypeByNameOrFullName(GetType().Name.Replace("ViewModel", "Window"));
+                return type == null ? null : GetWindowInstance(type);
+            }
+        }
+
+        /// <summary>
         /// Indicates if <see cref="BaseRelayCommand.RaiseCanExecuteChanged" /> should be called for each command
         /// after one of the properties of this instances has changed.
         /// </summary>
@@ -294,6 +373,12 @@
         /// Indicates if this instance is opened by a designer currrently.
         /// </summary>
         public static bool IsInDesignModeStatic => IsInDesignModeFactory.Value;
+
+        /// <summary>
+        /// Retrieves the <see cref="ViewTypeNameAttribute" /> associated to this type if there is any, otherwise <c>null</c> is
+        /// returned.
+        /// </summary>
+        public AssociatedViewAttribute ViewTypeNameAttribute => ReflectionHelper.GetViewTypeNameAttribute(GetType());
 
         /// <summary>
         /// Should be bound against the Closing event of the associated window using <see cref="EventToCommand" />.

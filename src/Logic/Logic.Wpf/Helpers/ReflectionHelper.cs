@@ -7,6 +7,9 @@
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using System.Reflection;
+    using System.Windows;
+
+    using Attributes;
 
     using Interfaces;
 
@@ -18,6 +21,22 @@
         #region constants
 
         /// <summary>
+        /// Lazy factory for retrieving a list of all currently available types which derive from <see cref="Window" /> in the
+        /// <see cref="AppDomain" />.
+        /// </summary>
+        public static Lazy<IEnumerable<Type>> ViewTypeListFactory = new Lazy<IEnumerable<Type>>(
+            () =>
+            {
+                var result = new List<Type>();
+                var assemblies = AppDomain.CurrentDomain.GetAssemblies();
+                foreach (var assembly in assemblies)
+                {
+                    result.AddRange(assembly.GetTypes().Where(t => !t.IsAbstract && typeof(Window).IsAssignableFrom(t)));
+                }
+                return result;
+            });
+
+        /// <summary>
         /// The on-demand factory for <see cref="ValidationCheckers" />.
         /// </summary>
         private static readonly Lazy<Dictionary<Type, IValidationAttributeChecker>> ValidationCheckersLazy = new Lazy<Dictionary<Type, IValidationAttributeChecker>>(
@@ -27,8 +46,11 @@
                 var checkerTypes = typeof(BaseViewModel).Assembly.GetTypes().Where(t => !t.IsAbstract && typeof(IValidationAttributeChecker).IsAssignableFrom(t));
                 foreach (var checkerType in checkerTypes)
                 {
-                    var attributeType = checkerType.BaseType.GenericTypeArguments.First();
-                    result.Add(attributeType, Activator.CreateInstance(checkerType) as IValidationAttributeChecker);
+                    var attributeType = checkerType.BaseType?.GenericTypeArguments.First();
+                    if (attributeType != null)
+                    {
+                        result.Add(attributeType, Activator.CreateInstance(checkerType) as IValidationAttributeChecker);
+                    }
                 }
                 return result;
             });
@@ -79,6 +101,33 @@
             AnnotatedProperties.TryAdd(targetType, result);
             // return result 
             return result;
+        }
+
+        /// <summary>
+        /// Tries to retrieve the type of a view by searching for the given <paramref name="nameOrFullName" /> inside
+        /// the <see cref="ViewTypeListFactory" /> interpreting the <paramref name="nameOrFullName" /> as the types name or full
+        /// name.
+        /// </summary>
+        /// <param name="nameOrFullName">The name of full name of the type of the view which should be returned.</param>
+        /// <returns>The type of the view or <c>null</c> if the name wasn't found.</returns>
+        public static Type GetViewTypeByNameOrFullName(string nameOrFullName)
+        {
+            if (string.IsNullOrEmpty(nameOrFullName))
+            {
+                return null;
+            }
+            return ViewTypeListFactory.Value.FirstOrDefault(t => t.Name.Equals(nameOrFullName, StringComparison.Ordinal) || (t.FullName?.Equals(nameOrFullName, StringComparison.Ordinal) ?? false));
+        }
+
+        /// <summary>
+        /// Tries to find and retrieve at least one <see cref="AssociatedViewAttribute" /> assigned to the given
+        /// <paramref name="targetType" />
+        /// </summary>
+        /// <param name="targetType">The type to inspect.</param>
+        /// <returns>The first assigned attribute or <c>null</c> if none is assigned.</returns>
+        public static AssociatedViewAttribute GetViewTypeNameAttribute(Type targetType)
+        {
+            return targetType.GetCustomAttributes(typeof(AssociatedViewAttribute)).Cast<AssociatedViewAttribute>().FirstOrDefault();
         }
 
         #endregion

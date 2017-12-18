@@ -3,9 +3,26 @@
                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                 xmlns:d="http://schemas.microsoft.com/expression/blend/2008" d1p1:Ignorable="d"
                 xmlns:d1p1="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                xmlns:Helpers="clr-namespace:devdeer.DoctorFlox.Ui.WpfSample.Helpers"
+                xmlns:Helpers="clr-namespace:devdeer.DoctorFlox.Ui.WpfSample.Helpers"                
                 StartupUri="MainWindow.xaml">
     <Application.Resources>
         <Helpers:ViewModelLocator x:Key="Locator" d:IsDataSource="True" />
+        <Style TargetType="Button">
+            <Setter Property="Padding" Value="10 5" />
+            <Setter Property="MaxHeight" Value="26" />
+            <Setter Property="Margin" Value="5 0 0 5" />
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="Margin" Value="0 2" />
+            <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)/ErrorContent}"/>
+        </Style>
+        <Style TargetType="Label">
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+        <Style TargetType="TextBlock" x:Key="Hint">
+            <Setter Property="Foreground" Value="CadetBlue" />
+            <Setter Property="FontSize" Value="10" />
+            <Setter Property="Margin" Value="5 10" />
+        </Style>
     </Application.Resources>
 </Application>

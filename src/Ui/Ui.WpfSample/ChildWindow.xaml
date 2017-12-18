@@ -8,23 +8,44 @@
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:Commands="clr-namespace:devdeer.DoctorFlox.Logic.Wpf.Commands;assembly=DoctorFlox.Logic.Wpf"
         mc:Ignorable="d"
-        Title="ChildWindow" Height="300" Width="300"
-        DataContext="{Binding ChildViewModel, Source={StaticResource Locator}}">
+        Title="Bind Tests" Height="250" Width="300" 
+        DataContext="{Binding ChildViewModel, Source={StaticResource Locator}}" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Closing">
             <Commands:EventToCommand Command="{Binding WindowClosingCommand}" PassEventArgsToCommand="True" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
-    <Window.Resources>
-        <Style TargetType="TextBox">
-            <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}"/>
-        </Style>
-    </Window.Resources>
-    <Grid>
-        <StackPanel>
-            <TextBox Text="{Binding Data.Firstname, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True }" />
-            <TextBox Text="{Binding Data.Lastname, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True }" />
-            <TextBox Text="{Binding Data.Age, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True }" />
+    <Grid Margin="5">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Label Grid.Row="0" Grid.Column="0" Content="Firstname:" />
+        <TextBox Grid.Row="0" Grid.Column="1" Name="txtFirstname" Text="{Binding Data.Firstname, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True }" />
+
+        <Label Grid.Row="1" Grid.Column="0" Content="Lastname:" />
+        <TextBox Grid.Row="1" Grid.Column="1" Name="txtLastname" Text="{Binding Data.Lastname, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True }" />
+
+        <Label Grid.Row="2" Grid.Column="0" Content="Age:" />
+        <TextBox Grid.Row="2" Grid.Column="1" Name="txtAge" Text="{Binding Data.Age, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True }" />
+
+        <TextBlock Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" TextWrapping="Wrap" Style="{DynamicResource Hint}">
+            This dialog shows command binding and error validation using an inner type that inherits from BaseDataModel. If you click "Rebind" a complete new
+            instance of a BaseDataModel is assigned to the bound input fields showing that validation still works then.
+        </TextBlock>
+        
+        <StackPanel Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+            <Button Content="Rebind" Command="{Binding RebindCommand}" />
+            <Button Content="OK" Command="{Binding OkCommand}" />
+            <Button Content="Cancel" Command="{Binding CancelCommand}" />
         </StackPanel>
     </Grid>
 </Window>

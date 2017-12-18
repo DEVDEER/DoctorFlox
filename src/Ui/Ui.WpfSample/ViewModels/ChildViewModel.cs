@@ -7,6 +7,7 @@
     using System.Threading;
 
     using Logic.Wpf;
+    using Logic.Wpf.Commands;
     using Logic.Wpf.Interfaces;
 
     using Models;
@@ -23,6 +24,7 @@
         {
             // some comment
             TraceMethodName();
+            EnforceRaisePropertyChanged = true;
         }
 
         #endregion
@@ -69,6 +71,15 @@
         {
             base.InitCommands();
             TraceMethodName();
+            RebindCommand = new RelayCommand(
+                () => Data = new ChildDataModel
+                {
+                    Firstname = "First",
+                    Lastname = "Last",
+                    Age = 20
+                });
+            OkCommand = new RelayCommand(() => ShowMessageBox("OK"), () => IsOk);
+            CancelCommand = new RelayCommand(CloseWindow);
         }
 
         /// <inheritdoc />
@@ -98,7 +109,25 @@
 
         #region properties
 
-        public ChildDataModel Data { get; } = new ChildDataModel();
+        /// <summary>
+        /// Closes the associated window.
+        /// </summary>
+        public RelayCommand CancelCommand { get; private set; }
+
+        /// <summary>
+        /// Represents the input data to bind to.
+        /// </summary>
+        public ChildDataModel Data { get; private set; } = new ChildDataModel();
+
+        /// <summary>
+        /// Defines the logic for the OK-button.
+        /// </summary>
+        public RelayCommand OkCommand { get; private set; }
+
+        /// <summary>
+        /// Sets the <see cref="Data" /> property to a new value.
+        /// </summary>
+        public RelayCommand RebindCommand { get; private set; }
 
         #endregion
     }

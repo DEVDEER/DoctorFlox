@@ -12,7 +12,8 @@
         Height="350"
         Width="525"
         WindowStartupLocation="CenterScreen" 
-        DataContext="{Binding MainViewModel, Source={StaticResource Locator}}">
+        DataContext="{Binding MainViewModel, Source={StaticResource Locator}}"
+        IsEnabled="{Binding IsValid, Source={StaticResource MessageListener}}">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Closing">
             <Commands:EventToCommand Command="{Binding WindowClosingCommand}" PassEventArgsToCommand="True" />

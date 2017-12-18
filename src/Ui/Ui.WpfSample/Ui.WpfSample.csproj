@@ -65,9 +65,12 @@
     <Compile Include="CollectionWindow.xaml.cs">
       <DependentUpon>CollectionWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Enumerations\WindowType.cs" />
     <Compile Include="Helpers\Variables.cs" />
     <Compile Include="Helpers\ViewModelLocator.cs" />
+    <Compile Include="MessageListener.cs" />
     <Compile Include="Models\ChildDataModel.cs" />
+    <Compile Include="Models\Messages\WindowOpenRequestMessage.cs" />
     <Compile Include="Resources\Default.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

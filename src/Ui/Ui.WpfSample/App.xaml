@@ -3,10 +3,12 @@
                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                 xmlns:d="http://schemas.microsoft.com/expression/blend/2008" d1p1:Ignorable="d"
                 xmlns:d1p1="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                xmlns:Helpers="clr-namespace:devdeer.DoctorFlox.Ui.WpfSample.Helpers"                
+                xmlns:Helpers="clr-namespace:devdeer.DoctorFlox.Ui.WpfSample.Helpers"
+                xmlns:WpfSample="clr-namespace:devdeer.DoctorFlox.Ui.WpfSample"
                 StartupUri="MainWindow.xaml">
     <Application.Resources>
         <Helpers:ViewModelLocator x:Key="Locator" d:IsDataSource="True" />
+        <WpfSample:MessageListener x:Key="MessageListener" x:Shared="True" />
         <Style TargetType="Button">
             <Setter Property="Padding" Value="10 5" />
             <Setter Property="MaxHeight" Value="26" />

@@ -126,6 +126,13 @@
         /// </summary>
         public string TestMessage { get; set; }
 
+        /// <summary>
+        /// If set to <c>true</c> all window-related events will be propagated via the <see cref="Messenger" />
+        /// instead of using reflection based
+        /// <see cref="BaseViewModel.CreateWindowInstance(System.Type,bool,System.Windows.Window)" />.
+        /// </summary>
+        public bool UseMessengerForWindowActions { get; set; }
+
         /// <inheritdoc />
         protected override Func<Type, Window> WindowInstanceResolver
         {

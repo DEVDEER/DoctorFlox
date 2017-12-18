@@ -155,6 +155,14 @@
         }
 
         /// <summary>
+        /// Can be used to close the window which holds the data context to this type.
+        /// </summary>
+        protected void CloseWindow()
+        {
+            AssociatedView?.Close();
+        }
+
+        /// <summary>
         /// Uses <see cref="ReflectionHelper.ViewTypeListFactory" /> to search for a given <paramref name="viewType" /> and
         /// retrieve an instance of
         /// it.

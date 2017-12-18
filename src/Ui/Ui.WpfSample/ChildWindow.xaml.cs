@@ -21,7 +21,7 @@ namespace devdeer.DoctorFlox.Ui.WpfSample
     {
         public ChildWindow()
         {
-            InitializeComponent();
+            InitializeComponent();            
         }
     }
 }

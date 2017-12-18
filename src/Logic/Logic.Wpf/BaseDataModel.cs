@@ -23,6 +23,10 @@
 
         private readonly object _validationLock = new object();
 
+        private IEnumerable<PropertyInfo> _baseModelProperties;
+
+        private IEnumerable<BaseDataModel> _childDataModels;
+
         private IEnumerable<PropertyInfo> _propertiesToWatch;
 
         #endregion
@@ -31,6 +35,18 @@
 
         /// <inheritdoc />
         public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;
+
+        #endregion
+
+        #region constructors and destructors
+
+        public BaseDataModel()
+        {
+            foreach (var child in ChildDataModels)
+            {
+                AttachChildModelHandler(child);
+            }
+        }
 
         #endregion
 
@@ -202,11 +218,43 @@
         protected override void OnPropertyChanged(string propertyName = null)
         {
             base.OnPropertyChanged(propertyName);
+            // check if this property needs it's own validation
             if (PropertiesToValidate.Any(p => p.Name.Equals(propertyName)))
             {
                 // this property should be validated
                 ValidateProperty(propertyName);
             }
+            // check if this property is of type BaseDataModel too
+            var prop = BaseDataModelProperties.FirstOrDefault(p => p.Name.Equals(propertyName));
+            if (prop != null)
+            {
+                // this means there was a new instance assigned to this property
+                AttachChildModelHandler(prop.GetValue(this) as BaseDataModel);
+            }
+        }
+
+        /// <summary>
+        /// Handles the initialization of an item that itself is a <see cref="BaseDataModel" />.
+        /// </summary>
+        /// <param name="child">The base data model.</param>
+        private void AttachChildModelHandler(BaseDataModel child)
+        {
+            child.ErrorsChanged += (s, e) =>
+            {
+                if (!(s is BaseDataModel model))
+                {
+                    return;
+                }
+                var key = model.GetType().Name + ".";
+                // This will clear all current errors starting with the types name
+                Errors.Where(err => err.Key.StartsWith(key)).ToList().ForEach(k => Errors.TryRemove(k.Key, out _));
+                foreach (var err in model.Errors)
+                {
+                    // add an error to this model for each error comoing from the other model                    
+                    Errors.TryAdd(key + err.Key, err.Value);
+                }
+            };
+            child.Validate();
         }
 
         /// <summary>
@@ -245,6 +293,39 @@
         /// Indicates if inner errors of properties should be collapsed to the first found error.
         /// </summary>
         protected virtual bool CollapseInnerDataErrors => true;
+
+        /// <summary>
+        /// Retrieves the property informations on all properties that are deriving from this type itself.
+        /// </summary>
+        private IEnumerable<PropertyInfo> BaseDataModelProperties
+        {
+            get
+            {
+                if (_baseModelProperties != null)
+                {
+                    return _baseModelProperties;
+                }
+                var result = new List<PropertyInfo>();
+                result.AddRange(ReflectionHelper.GetPropertiesInheritingFromBaseDataModel(GetType()));
+                _baseModelProperties = result;
+                return result;
+            }
+        }
+
+        /// <summary>
+        /// Retrieves the list of <see cref="BaseDataModel" /> provided in this instance.
+        /// </summary>
+        /// <remarks>
+        /// Is implemented as a lazy property.
+        /// </remarks>
+        private IEnumerable<BaseDataModel> ChildDataModels
+        {
+            get
+            {
+                return _childDataModels ?? (_childDataModels =
+                           GetType().GetProperties().Where(p => typeof(BaseDataModel).IsAssignableFrom(p.PropertyType)).Select(c => c.GetValue(this)).Cast<BaseDataModel>());
+            }
+        }
 
         /// <summary>
         /// A dictionary of current errors with the name of the error-field as the key and the error

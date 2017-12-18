@@ -81,6 +81,27 @@
         }
 
         /// <summary>
+        /// Retrieves all properties of a given <paramref name="targetType" /> which are inherting from
+        /// <see cref="BaseDataModel" />.
+        /// </summary>
+        /// <param name="targetType">The type to inspect.</param>
+        /// <returns>The list of properties deriving from <see cref="BaseDataModel"/>.</returns>
+        public static IEnumerable<PropertyInfo> GetPropertiesInheritingFromBaseDataModel(Type targetType)
+        {
+            if (BaseDataModelProperties.ContainsKey(targetType))
+            {
+                // found it in the cache
+                return BaseDataModelProperties[targetType];
+            }
+            // get all public non-static properties of the target type implementing IDataErrorInfo
+            var result = targetType.GetProperties(BindingFlags.Public | BindingFlags.Instance).Where(p => typeof(BaseDataModel).IsAssignableFrom(p.PropertyType)).Distinct().ToList();
+            // update the cache
+            BaseDataModelProperties.TryAdd(targetType, result);
+            // return result 
+            return result;
+        }
+
+        /// <summary>
         /// Retrieves all properties of a given <paramref name="targetType" /> which are flagged with at least one
         /// <see cref="ValidationAttribute" />.
         /// </summary>
@@ -151,6 +172,12 @@
         /// <see cref="IDataErrorInfo" />.
         /// </summary>
         private static ConcurrentDictionary<Type, IEnumerable<PropertyInfo>> DataErrorInfoProperties { get; } = new ConcurrentDictionary<Type, IEnumerable<PropertyInfo>>();
+
+        /// <summary>
+        /// A dictionary where the key is some type and the value is the collection of properties which are inherting from
+        /// <see cref="BaseDataModel" />.
+        /// </summary>
+        private static ConcurrentDictionary<Type, IEnumerable<PropertyInfo>> BaseDataModelProperties { get; } = new ConcurrentDictionary<Type, IEnumerable<PropertyInfo>>();
 
         /// <summary>
         /// Is used internally to get all types inherting from <see cref="ValidationAttribute" /> only once if needed.

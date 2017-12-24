@@ -51,6 +51,11 @@
             {
                 AttachChildModelHandler(child);
             }
+            // ReSharper disable once VirtualMemberCallInConstructor
+            if (ValidateOnInstantiation)
+            {
+                Validate();
+            }
         }
 
         #endregion
@@ -250,6 +255,10 @@
         /// <param name="child">The base data model.</param>
         private void AttachChildModelHandler(BaseDataModel child)
         {
+            if (child == null)
+            {
+                return;
+            }
             child.ErrorsChanged += (s, e) =>
             {
                 if (!(s is BaseDataModel model))
@@ -293,6 +302,11 @@
         #region properties
 
         /// <summary>
+        /// The amount of errors in the current instance.
+        /// </summary>
+        public int ErrorsCount => Errors.Count;
+
+        /// <summary>
         /// The opposite of <see cref="HasErrors" />.
         /// </summary>
         /// <remarks>
@@ -309,6 +323,11 @@
         /// Indicates whether internal <see cref="BaseDataModel" /> types should NOT be handled explicitely.
         /// </summary>
         protected virtual bool IgnoreInternalModels => false;
+
+        /// <summary>
+        /// Defines if <see cref="Validate" /> should be called on ctor.
+        /// </summary>
+        protected virtual bool ValidateOnInstantiation => false;
 
         /// <summary>
         /// Retrieves the property informations on all properties that are deriving from this type itself.

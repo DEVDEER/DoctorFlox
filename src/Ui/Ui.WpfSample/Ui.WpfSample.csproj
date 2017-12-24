@@ -134,8 +134,8 @@
     <PackageReference Include="Autofac">
       <Version>4.6.2</Version>
     </PackageReference>
-    <PackageReference Include="PropertyChanged.Fody">
-      <Version>2.1.4</Version>
+    <PackageReference Include="PropertyChanged2.Fody">
+      <Version>2.1.4.1</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>

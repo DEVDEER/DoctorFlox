@@ -1,12 +1,7 @@
-﻿using System;
-using System.Linq;
-
-namespace devdeer.DoctorFlox.Logic.Wpf.Helpers
+﻿namespace devdeer.DoctorFlox.Logic.Wpf.Helpers
 {
     using System;
-    using System;
     using System.Diagnostics.CodeAnalysis;
-    using System.Linq;
     using System.Linq;
     using System.Reflection;
 

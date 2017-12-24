@@ -5,6 +5,8 @@
 
     using Autofac;
 
+    using Logic.Wpf;
+
     using ViewModels;
 
     /// <summary>
@@ -17,17 +19,17 @@
         /// <summary>
         /// The view model for the child window.
         /// </summary>
-        public ChildViewModel ChildViewModel => Variables.AutoFacContainer.Resolve<ChildViewModel>();
+        public ChildViewModel ChildViewModel => BaseViewModel.IsInDesignModeStatic ? new ChildViewModel() : Variables.AutoFacContainer.Resolve<ChildViewModel>();
 
         /// <summary>
         /// The view model for the list window.
         /// </summary>
-        public CollectionViewModel CollectionViewModel => Variables.AutoFacContainer.Resolve<CollectionViewModel>();
+        public CollectionViewModel CollectionViewModel => BaseViewModel.IsInDesignModeStatic ? new CollectionViewModel() : Variables.AutoFacContainer.Resolve<CollectionViewModel>();
 
         /// <summary>
         /// The view model for the main window.
         /// </summary>
-        public MainViewModel MainViewModel => Variables.AutoFacContainer.Resolve<MainViewModel>();
+        public MainViewModel MainViewModel => BaseViewModel.IsInDesignModeStatic ? new MainViewModel() : Variables.AutoFacContainer.Resolve<MainViewModel>();
 
         #endregion
     }

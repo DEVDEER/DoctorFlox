@@ -42,6 +42,11 @@
 
         public BaseDataModel()
         {
+            // ReSharper disable once VirtualMemberCallInConstructor
+            if (IgnoreInternalModels)
+            {
+                return;
+            }
             foreach (var child in ChildDataModels)
             {
                 AttachChildModelHandler(child);
@@ -191,6 +196,7 @@
             {
                 Errors.TryAdd(error.Key, error.Value);
             }
+
             // we have to this because the Dictionary does not implement INotifyPropertyChanged            
             OnPropertyChanged(nameof(HasErrors));
             OnPropertyChanged(nameof(IsOk));
@@ -223,6 +229,11 @@
             {
                 // this property should be validated
                 ValidateProperty(propertyName);
+            }
+            if (IgnoreInternalModels)
+            {
+                // this view model should not handle internal BaseDataModels explicitely
+                return;
             }
             // check if this property is of type BaseDataModel too
             var prop = BaseDataModelProperties.FirstOrDefault(p => p.Name.Equals(propertyName));
@@ -293,6 +304,11 @@
         /// Indicates if inner errors of properties should be collapsed to the first found error.
         /// </summary>
         protected virtual bool CollapseInnerDataErrors => true;
+
+        /// <summary>
+        /// Indicates whether internal <see cref="BaseDataModel" /> types should NOT be handled explicitely.
+        /// </summary>
+        protected virtual bool IgnoreInternalModels => false;
 
         /// <summary>
         /// Retrieves the property informations on all properties that are deriving from this type itself.

@@ -19,10 +19,21 @@
     {
         #region constructors and destructors
 
+        public ChildViewModel()
+        {
+            TraceMethodName();
+            EnforceRaisePropertyChanged = true;
+        }
+
+        public ChildViewModel(IMessenger messenger) : base(messenger)
+        {
+            TraceMethodName();
+            EnforceRaisePropertyChanged = true;
+        }
+
         /// <inheritdoc />
         public ChildViewModel(IMessenger messenger, SynchronizationContext synchronizationContext) : base(messenger, synchronizationContext)
         {
-            // some comment
             TraceMethodName();
             EnforceRaisePropertyChanged = true;
         }

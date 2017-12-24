@@ -12,10 +12,17 @@
         <Style TargetType="Button">
             <Setter Property="Padding" Value="10 5" />
             <Setter Property="MaxHeight" Value="26" />
-            <Setter Property="Margin" Value="5 0 0 5" />
+            <Setter Property="Margin" Value="0 2" />
+        </Style>
+        <Style TargetType="Button" x:Key="HorizontalButton" BasedOn="{StaticResource {x:Type Button}}">
+            <Setter Property="Margin" Value="2 2" />
+        </Style>
+        <Style TargetType="Button" x:Key="HorizontalSideButton" BasedOn="{StaticResource HorizontalButton}">
+            <Setter Property="Margin" Value="2 2 10 2" />
         </Style>
         <Style TargetType="TextBox">
             <Setter Property="Margin" Value="0 2" />
+            <Setter Property="MinHeight" Value="26" />
             <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)/ErrorContent}"/>
         </Style>
         <Style TargetType="Label">
@@ -25,6 +32,10 @@
             <Setter Property="Foreground" Value="CadetBlue" />
             <Setter Property="FontSize" Value="10" />
             <Setter Property="Margin" Value="5 10" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+        </Style>
+        <Style TargetType="GroupBox">
+            <Setter Property="Padding" Value="5 10 5 5" />
         </Style>
     </Application.Resources>
 </Application>

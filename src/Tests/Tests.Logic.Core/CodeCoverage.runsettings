@@ -7,11 +7,8 @@
         <Configuration>
           <CodeCoverage>
             <ModulePaths>
-              <Include>
-                <ModulePath>DoctorFlox.Logic.Wpf</ModulePath>
-              </Include>
               <Exclude>
-                <ModulePath>*Tests.Logic.Core.dll$</ModulePath>
+                <ModulePath>.*Tests.Logic.Core.dll$</ModulePath>
               </Exclude>
             </ModulePaths>
           </CodeCoverage>

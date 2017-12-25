@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
 
     using devdeer.DoctorFlox.Logic.Wpf;
@@ -14,6 +15,7 @@
     /// Contains unit tests for the type <see cref="BaseObservableObject" />.
     /// </summary>
     [TestClass]
+    [ExcludeFromCodeCoverage]
     public class BaseObservableObjectTests
     {
         #region methods
@@ -27,7 +29,7 @@
         /// logic to to raise the event when the current value equals the new one.
         /// </remarks>
         [TestMethod]
-        public void PropertyChangedRaisingTest()
+        public void BaseObservableObjectPropertyChangedRaisingTest()
         {
             // arrange
             var testObject = new TestObservable();

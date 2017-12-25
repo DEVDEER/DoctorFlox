@@ -56,10 +56,12 @@
     <Compile Include="BaseDataModelTests.cs" />
     <Compile Include="BaseObservableObjectTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestModels\LazyTestDataModel.cs" />
     <Compile Include="TestModels\TestDataModel.cs" />
     <Compile Include="TestModels\TestObservable.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="CodeCoverage.runsettings" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

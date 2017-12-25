@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
 
     using devdeer.DoctorFlox.Logic.Wpf;
@@ -14,6 +15,7 @@
     /// Contains unit tests for the type <see cref="BaseDataModel" />.
     /// </summary>
     [TestClass]
+    [ExcludeFromCodeCoverage]
     public class BaseDataModelTests
     {
         #region methods
@@ -23,7 +25,7 @@
         /// the model is valid after the necessary changes.
         /// </summary>
         [TestMethod]
-        public void ErrorEventTest()
+        public void BaseDataModelErrorEventTest()
         {
             // arrange
             var testObject = new TestDataModel();
@@ -45,7 +47,7 @@
         /// Tests if the sample model has the correct amount of errors right when it gets constructed.
         /// </summary>
         [TestMethod]
-        public void ErrorsPresentOnInitTest()
+        public void BaseDataModelErrorsPresentOnInitTest()
         {
             // arrange
             const int ExpectedErrorsCount = 2;
@@ -59,6 +61,22 @@
             Assert.IsFalse(testObject.IsOk);
             Assert.AreEqual(ExpectedErrorsCount, testObject.ErrorsCount);
             Assert.AreEqual(ExpectedErrorsCount, testObject.Related.ErrorsCount);
+        }
+
+        /// <summary>
+        /// Tests if the <see cref="BaseDataModel.ValidateOnInstantiation" /> property works for new instances.
+        /// </summary>
+        [TestMethod]
+        public void BaseDataModelValidateOnInstantiationTest()
+        {
+            // arrange
+            var objectWithValidation = new TestDataModel();
+            var objectWithoutValidation = new LazyTestDataModel();
+            // act & assert
+            Assert.IsFalse(objectWithValidation.IsOk);
+            Assert.IsTrue(objectWithValidation.HasErrors);
+            Assert.IsTrue(objectWithoutValidation.IsOk);
+            Assert.IsFalse(objectWithoutValidation.HasErrors);
         }
 
         #endregion

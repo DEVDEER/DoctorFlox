@@ -50,7 +50,7 @@
             base.AfterInitialization();
             Task.Delay(2000).ContinueWith(
                 t =>
-                {
+                {                    
                     Trace.TraceInformation($"Sending message from thread {Thread.CurrentThread.ManagedThreadId}");
                     MessengerInstance.Send(new DataMessage<MainViewModel, MainViewModel, string>("Hello"));
                 });
@@ -59,8 +59,11 @@
         /// <inheritdoc />
         protected override void InitCommands()
         {
-            base.InitCommands();
-            ShowMessageCommand = new RelayCommand(() => ShowMessageBox($"You said: {TestMessage}", "Test Message"), () => !string.IsNullOrEmpty(TestMessage));
+            base.InitCommands();            
+            ShowMessageCommand = new RelayCommand(() =>
+            {                
+                ShowMessageBox($"You said: {TestMessage}", "Test Message");
+            }, () => !string.IsNullOrEmpty(TestMessage));
             OpenChildWindowCommand = new RelayCommand(
                 () =>
                 {
@@ -70,7 +73,8 @@
                         return;
                     }
                     var windowInstance = CreateWindowInstance("ChildWindow");
-                    windowInstance?.ShowDialog();
+                    MessengerInstance.Send(new DataMessage<MainViewModel, ChildViewModel, string>(this, "Hello World!"));
+                    windowInstance?.ShowDialog();                    
                 });
             OpenCollectionWindowCommand = new RelayCommand(
                 () =>

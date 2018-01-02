@@ -8,7 +8,9 @@
 
     using Logic.Wpf;
     using Logic.Wpf.Commands;
+    using Logic.Wpf.Enumerations;
     using Logic.Wpf.Interfaces;
+    using Logic.Wpf.Messages;
 
     using Models;
 
@@ -105,6 +107,13 @@
         {
             base.InitMessenger();
             TraceMethodName();
+            MessengerInstance.Register<DataMessage<MainViewModel, ChildViewModel, string>>(
+                this,
+                ThreadCallbackOption.UiThread,
+                m =>
+                {
+                    ShowMessageBox($"Message from main view: {m.Data}.");
+                });
         }
 
         /// <summary>

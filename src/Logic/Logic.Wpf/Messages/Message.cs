@@ -72,14 +72,14 @@ namespace devdeer.DoctorFlox.Logic.Wpf.Messages
         #region constructors and destructors
 
         /// <summary>
-        /// Initializes a new instance of the BaseMessage class.
+        /// Default constructor.
         /// </summary>
         public Message()
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the BaseMessage class.
+        /// Initializes a new instance defining the <paramref name="sender"/> only.
         /// </summary>
         /// <param name="sender">The message's original sender.</param>
         public Message(TSender sender)
@@ -88,7 +88,7 @@ namespace devdeer.DoctorFlox.Logic.Wpf.Messages
         }
 
         /// <summary>
-        /// Initializes a new instance of the BaseMessage class.
+        /// Initializes a new instance defining <paramref name="sender"/> and <paramref name="target"/>.
         /// </summary>
         /// <param name="sender">The message's original sender.</param>
         /// <param name="target">

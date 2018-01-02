@@ -3,8 +3,8 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
-    using System.Diagnostics;
     using System.Linq;
+    using System.Runtime.CompilerServices;
     using System.Threading;
     using System.Windows;
 
@@ -52,7 +52,7 @@
         /// </summary>
         public BaseViewModel() : this(Messenger.Default)
         {
-            PerformConstructorCalls();            
+            PerformConstructorCalls();
         }
 
         /// <summary>
@@ -215,15 +215,31 @@
         /// <summary>
         /// Searches for a type in all currently opened windows.
         /// </summary>
+        /// <remarks>
+        /// Optionally checks for <see cref="id"/> too so that multiple instances of windows targetting 
+        /// </remarks>
         /// <param name="windowType">The type of the window to search for.</param>
+        /// <param name="id">The id of the window or <c>null</c> resp. <see cref="Guid.Empty"/> if the there is
+        /// no need for id-check.</param>
         /// <returns>The window instance or <c>null</c> if no result was found.</returns>
-        protected Window GetWindowInstance(Type windowType)
-        {
+        protected Window GetWindowInstance(Type windowType, Guid id)
+        {            
             foreach (var window in Application.Current.Windows)
             {
-                if (window.GetType() == windowType)
+                // check if the provided windowType matches
+                if (window.GetType() != windowType)
                 {
-                    return window as Window;
+                    continue;
+                }
+                // check if this type actually is a Window
+                if (!(window is Window result))
+                {
+                    continue;
+                }
+                // check if this is the window belonging to this instance of the view model
+                if (result.DataContext is BaseViewModel windowContext && (id == Guid.Empty || windowContext.Id == id))
+                {
+                    return result;
                 }
             }
             return null;
@@ -361,7 +377,7 @@
                 }
                 // try to retrieve type using name conventions
                 var type = ReflectionHelper.GetViewTypeByNameOrFullName(GetType().Name.Replace("ViewModel", "Window"));
-                return type == null ? null : GetWindowInstance(type);
+                return type == null ? null : GetWindowInstance(type, Id);
             }
         }
 
@@ -370,6 +386,11 @@
         /// after one of the properties of this instances has changed.
         /// </summary>
         public bool EnforceRaisePropertyChanged { get; set; } = false;
+
+        /// <summary>
+        /// The unique id of this instance.
+        /// </summary>
+        public Guid Id { get; } = Guid.NewGuid();
 
         /// <summary>
         /// Indicates if this instance is opened by a designer currrently.

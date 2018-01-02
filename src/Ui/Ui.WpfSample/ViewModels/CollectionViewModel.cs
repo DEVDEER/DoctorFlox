@@ -6,10 +6,15 @@
     using System.Threading;
 
     using Logic.Wpf;
+    using Logic.Wpf.Attributes;
     using Logic.Wpf.Interfaces;
 
     using Models;
 
+    /// <summary>
+    /// The view model for the collection window.
+    /// </summary>
+    [AssociatedView("devdeer.DoctorFlox.Ui.WpfSample.CollectionWindow")]
     public class CollectionViewModel : BaseCollectionViewModel<ChildDataModel>
     {
         #region constructors and destructors
@@ -45,9 +50,13 @@
         }
 
         /// <summary>
+        /// Retrieves a list of <paramref name="amount" /> items with random values.
         /// </summary>
-        /// <param name="amount"></param>
-        /// <returns></returns>
+        /// <remarks>
+        /// Uses yield to return the items on demand.
+        /// </remarks>
+        /// <param name="amount">The amount of items to retrieve.</param>
+        /// <returns>The items in a yielded manner.</returns>
         private IEnumerable<ChildDataModel> GetSampleItems(int amount)
         {
             var random = new Random(DateTime.Now.Millisecond);

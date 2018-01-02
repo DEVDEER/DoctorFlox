@@ -50,7 +50,7 @@
             base.AfterInitialization();
             Task.Delay(2000).ContinueWith(
                 t =>
-                {
+                {                    
                     Trace.TraceInformation($"Sending message from thread {Thread.CurrentThread.ManagedThreadId}");
                     MessengerInstance.Send(new DataMessage<MainViewModel, MainViewModel, string>("Hello"));
                 });
@@ -59,8 +59,11 @@
         /// <inheritdoc />
         protected override void InitCommands()
         {
-            base.InitCommands();
-            ShowMessageCommand = new RelayCommand(() => ShowMessageBox($"You said: {TestMessage}", "Test Message"), () => !string.IsNullOrEmpty(TestMessage));
+            base.InitCommands();            
+            ShowMessageCommand = new RelayCommand(() =>
+            {                
+                ShowMessageBox($"You said: {TestMessage}", "Test Message");
+            }, () => !string.IsNullOrEmpty(TestMessage));
             OpenChildWindowCommand = new RelayCommand(
                 () =>
                 {
@@ -70,7 +73,8 @@
                         return;
                     }
                     var windowInstance = CreateWindowInstance("ChildWindow");
-                    windowInstance?.ShowDialog();
+                    MessengerInstance.Send(new DataMessage<MainViewModel, ChildViewModel, string>(this, "Hello World!"));
+                    windowInstance?.ShowDialog();                    
                 });
             OpenCollectionWindowCommand = new RelayCommand(
                 () =>
@@ -82,6 +86,15 @@
                     }
                     var windowInstance = CreateWindowInstance("CollectionWindow");
                     windowInstance?.ShowDialog();
+                });
+            OpenMultiWindowCommand = new RelayCommand(
+                () =>
+                {
+                    for (var i = 0; i < 3; i++)
+                    {
+                        var windowInstance = CreateWindowInstance("MultiWindow");                        
+                        windowInstance?.Show();
+                    }
                 });
         }
 
@@ -136,6 +149,11 @@
         /// Triggers the opening of a new collection window.
         /// </summary>
         public RelayCommand OpenCollectionWindowCommand { get; private set; }
+
+        /// <summary>
+        /// Triggers the opening 3 different multi-windows at once.
+        /// </summary>
+        public RelayCommand OpenMultiWindowCommand { get; private set; }
 
         /// <summary>
         /// Can be used to show a message box.

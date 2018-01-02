@@ -42,7 +42,7 @@
 
         #region constructors and destructors
 
-        public Messenger(SynchronizationContext context)
+        internal Messenger(SynchronizationContext context)
         {
             _synchronizationContext = context;
         }

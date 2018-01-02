@@ -33,7 +33,7 @@
         private static void HandleWindowOpenRequestMessage(WindowOpenRequestMessage message)
         {
             Window window = null;
-            switch (message.WindowType)
+            switch (message.Data)
             {
                 case WindowType.ChildWindow:
                     window = new ChildWindow();

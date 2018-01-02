@@ -1,0 +1,15 @@
+﻿<Window x:Class="devdeer.DoctorFlox.Ui.WpfSample.MultiWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:devdeer.DoctorFlox.Ui.WpfSample"
+        mc:Ignorable="d"
+        Title="MultiWindow" Height="109" Width="160" ResizeMode="NoResize"
+        DataContext="{Binding MultiViewModel, Source={StaticResource Locator}}">
+    <StackPanel>
+        <Label Content="Window Id:" />
+        <TextBlock Text="{Binding WindowHashCode}" />
+        <Button Command="{Binding ShowMessageCommand}" Content="Show Message" />
+    </StackPanel>
+</Window>

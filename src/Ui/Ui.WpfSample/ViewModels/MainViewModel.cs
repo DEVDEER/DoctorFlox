@@ -87,6 +87,15 @@
                     var windowInstance = CreateWindowInstance("CollectionWindow");
                     windowInstance?.ShowDialog();
                 });
+            OpenMultiWindowCommand = new RelayCommand(
+                () =>
+                {
+                    for (var i = 0; i < 3; i++)
+                    {
+                        var windowInstance = CreateWindowInstance("MultiWindow");                        
+                        windowInstance?.Show();
+                    }
+                });
         }
 
         /// <inheritdoc />
@@ -140,6 +149,11 @@
         /// Triggers the opening of a new collection window.
         /// </summary>
         public RelayCommand OpenCollectionWindowCommand { get; private set; }
+
+        /// <summary>
+        /// Triggers the opening 3 different multi-windows at once.
+        /// </summary>
+        public RelayCommand OpenMultiWindowCommand { get; private set; }
 
         /// <summary>
         /// Can be used to show a message box.

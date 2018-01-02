@@ -31,6 +31,11 @@
         /// </summary>
         public MainViewModel MainViewModel => BaseViewModel.IsInDesignModeStatic ? new MainViewModel() : Variables.AutoFacContainer.Resolve<MainViewModel>();
 
+        /// <summary>
+        /// The view model for the multi window.
+        /// </summary>
+        public MultiViewModel MultiViewModel => BaseViewModel.IsInDesignModeStatic ? new MultiViewModel() : Variables.AutoFacContainer.Resolve<MultiViewModel>();
+
         #endregion
     }
 }

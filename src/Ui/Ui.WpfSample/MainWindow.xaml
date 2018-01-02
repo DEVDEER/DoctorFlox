@@ -9,9 +9,9 @@
         xmlns:Commands="clr-namespace:devdeer.DoctorFlox.Logic.Wpf.Commands;assembly=DoctorFlox.Logic.Wpf"
         mc:Ignorable="d"
         Title="{Binding Caption}"
-        Height="270"
+        Height="470"
         Width="500"
-        MinHeight="270"
+        MinHeight="470"
         MinWidth="500"
         WindowStartupLocation="CenterScreen" 
         DataContext="{Binding MainViewModel, Source={StaticResource Locator}}"
@@ -28,6 +28,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
+            <RowDefinition />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -81,5 +82,20 @@
                 <Button Grid.Row="3" Content="Show List Window" Command="{Binding OpenCollectionWindowCommand}" />
             </Grid>
         </GroupBox>
+
+        <GroupBox Grid.Row="1" Grid.Column="0" Header="Multiple windows">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0">
+                    This will open 3 windows binding against the same type of view model. If you click the button you will see
+                    the profe of the fact that each view model will find it's view even if there is more than one bound.
+                </TextBlock>
+                <Button Grid.Row="1" Content="Open 3 windows" Command="{Binding OpenMultiWindowCommand}" />
+            </Grid>
+        </GroupBox>
+
     </Grid>
 </Window>

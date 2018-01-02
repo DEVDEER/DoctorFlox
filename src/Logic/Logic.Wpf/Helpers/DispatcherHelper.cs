@@ -62,13 +62,11 @@
 
         /// <summary>
         /// This method should be called once on the UI thread to ensure that
-        /// the <see cref="UiDispatcher" /> property is initialized.
-        /// <para>
-        /// In a Silverlight application, call this method in the
-        /// Application_Startup event handler, after the MainPage is constructed.
-        /// </para>
-        /// <para>In WPF, call this method on the static App() constructor.</para>
+        /// the <see cref="UiDispatcher" /> property is initialized.                
         /// </summary>
+        /// <remarks>
+        /// Call this method on the static App() constructor.
+        /// </remarks>
         public static void Initialize()
         {
             if (UiDispatcher != null && UiDispatcher.Thread.IsAlive)

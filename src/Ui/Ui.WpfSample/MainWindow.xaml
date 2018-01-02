@@ -8,9 +8,11 @@
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:Commands="clr-namespace:devdeer.DoctorFlox.Logic.Wpf.Commands;assembly=DoctorFlox.Logic.Wpf"
         mc:Ignorable="d"
-        Title="{Binding Caption, Mode=OneWay}"
-        Height="350"
-        Width="525"
+        Title="{Binding Caption}"
+        Height="270"
+        Width="500"
+        MinHeight="270"
+        MinWidth="500"
         WindowStartupLocation="CenterScreen" 
         DataContext="{Binding MainViewModel, Source={StaticResource Locator}}"
         IsEnabled="{Binding IsValid, Source={StaticResource MessageListener}}">
@@ -19,20 +21,65 @@
             <Commands:EventToCommand Command="{Binding WindowClosingCommand}" PassEventArgsToCommand="True" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
+    <Window.Resources>
+        <Style TargetType="TextBlock" BasedOn="{StaticResource Hint}">
+        </Style>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition />
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0" Text="{Binding Message}" />
-        <StackPanel Grid.Row="1">
-            <TextBox Text="{Binding TestMessage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
-            <Label Content="{Binding AssociatedView.Title}" />
-            <Button Content="Show Message" Command="{Binding ShowMessageCommand}" />
-            <Button Content="Show Child" Command="{Binding OpenChildWindowCommand}" />
-            <Button Content="Show List Window" Command="{Binding OpenCollectionWindowCommand}" />
-        </StackPanel>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <GroupBox Grid.Row="0" Grid.Column="0" Header="View Resolving">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0">
+                    The label below will use the property 'AssociatedView' of the BaseViewModel to get the
+                    caption of the Window itself.
+                </TextBlock>
+                <Label Grid.Row="1" Content="{Binding AssociatedView.Title}" />
+            </Grid>
+        </GroupBox>
+
+        <GroupBox Grid.Row="0" Grid.Column="1" Header="Command Binding">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0">
+                    Enter a text in the field below and see how the button will change it's state due to the command binding.
+                </TextBlock>
+                <TextBox Grid.Row="1" Text="{Binding TestMessage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                <Button Grid.Row="2" Content="Show Message" Command="{Binding ShowMessageCommand}" />
+            </Grid>
+        </GroupBox>
+
+        <GroupBox Grid.Row="0" Grid.Column="2" Header="View Control">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0">
+                    Use the buttons to open other views from within this BaseViewModel. If you check the 'UseMessenger' below, the logic
+                    will switch to Messenger-based window-opening instead of using reflection-based logic.
+                </TextBlock>
+                <CheckBox Grid.Row="1" Content="Use Messenger" IsChecked="{Binding UseMessengerForWindowActions, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                <Button Grid.Row="2" Content="Show Child" Command="{Binding OpenChildWindowCommand}" />
+                <Button Grid.Row="3" Content="Show List Window" Command="{Binding OpenCollectionWindowCommand}" />
+            </Grid>
+        </GroupBox>
     </Grid>
 </Window>

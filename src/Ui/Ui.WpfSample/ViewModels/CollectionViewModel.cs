@@ -14,7 +14,14 @@
     {
         #region constructors and destructors
 
-        /// <inheritdoc />
+        public CollectionViewModel()
+        {
+        }
+
+        public CollectionViewModel(IMessenger messenger) : base(messenger)
+        {
+        }
+
         public CollectionViewModel(IMessenger messenger, SynchronizationContext synchronizationContext) : base(messenger, synchronizationContext)
         {
         }
@@ -27,19 +34,32 @@
         protected override void InitData()
         {
             base.InitData();
-            var data = new List<ChildDataModel>();
+            InitItems(GetSampleItems(1000));
+        }
+
+        /// <inheritdoc />
+        protected override void InitDesignTimeData()
+        {
+            base.InitDesignTimeData();
+            InitItemsDesignTime(GetSampleItems(10));
+        }
+
+        /// <summary>
+        /// </summary>
+        /// <param name="amount"></param>
+        /// <returns></returns>
+        private IEnumerable<ChildDataModel> GetSampleItems(int amount)
+        {
             var random = new Random(DateTime.Now.Millisecond);
-            for (var i = 0; i < 1000; i++)
+            for (var i = 0; i < amount; i++)
             {
-                data.Add(
-                    new ChildDataModel
-                    {
-                        Firstname = Guid.NewGuid().ToString("N").Substring(0, 20),
-                        Lastname = Guid.NewGuid().ToString("N").Substring(0, 20),
-                        Age = random.Next(2, 90)
-                    });
+                yield return new ChildDataModel
+                {
+                    Firstname = Guid.NewGuid().ToString("N").Substring(0, 20),
+                    Lastname = Guid.NewGuid().ToString("N").Substring(0, 20),
+                    Age = random.Next(2, 90)
+                };
             }
-            InitItems(data);
         }
 
         #endregion

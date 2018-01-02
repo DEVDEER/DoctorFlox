@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/10/nuspec.xsd">
     <metadata>
         <id>devdeer.DoctorFlox</id>
-        <version>0.2.1-beta</version>
+        <version>0.2.2-beta</version>
         <title>DoctorFlox</title>
         <authors>DEVDEER</authors>
         <owners>DEVDEER</owners>
@@ -10,7 +10,7 @@
         <iconUrl>https://devdeer.blob.core.windows.net/shared/doctorflox/doctorflox_64.png</iconUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>An Open Source MVVM framework for .NET Framework.</description>
-        <releaseNotes>Implemented window close method and error-handling of subsequent BaseDataModels.</releaseNotes>
+        <releaseNotes>Minor changes to BaseDataModel and BaseViewModel. BaseCollectionViewModel will not automatically try to collect sub-property-error-handling which lead to exceptions.</releaseNotes>
         <copyright>DEVDEER UG 2017</copyright>
         <tags>DEVDEER,MVVM,WPF,.NET</tags>
     </metadata>

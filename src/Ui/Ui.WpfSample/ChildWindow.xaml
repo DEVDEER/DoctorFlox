@@ -43,9 +43,9 @@
         </TextBlock>
         
         <StackPanel Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
-            <Button Content="Rebind" Command="{Binding RebindCommand}" />
-            <Button Content="OK" Command="{Binding OkCommand}" />
-            <Button Content="Cancel" Command="{Binding CancelCommand}" />
+            <Button Content="Rebind" Command="{Binding RebindCommand}" Style="{DynamicResource HorizontalSideButton}" />
+            <Button Content="OK" Command="{Binding OkCommand}" Style="{DynamicResource HorizontalButton}" />
+            <Button Content="Cancel" Command="{Binding CancelCommand}" Style="{DynamicResource HorizontalButton}" />
         </StackPanel>
     </Grid>
 </Window>

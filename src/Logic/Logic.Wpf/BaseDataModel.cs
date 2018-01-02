@@ -42,9 +42,19 @@
 
         public BaseDataModel()
         {
+            // ReSharper disable once VirtualMemberCallInConstructor
+            if (IgnoreInternalModels)
+            {
+                return;
+            }
             foreach (var child in ChildDataModels)
             {
                 AttachChildModelHandler(child);
+            }
+            // ReSharper disable once VirtualMemberCallInConstructor
+            if (ValidateOnInstantiation)
+            {
+                Validate();
             }
         }
 
@@ -191,6 +201,7 @@
             {
                 Errors.TryAdd(error.Key, error.Value);
             }
+
             // we have to this because the Dictionary does not implement INotifyPropertyChanged            
             OnPropertyChanged(nameof(HasErrors));
             OnPropertyChanged(nameof(IsOk));
@@ -224,6 +235,11 @@
                 // this property should be validated
                 ValidateProperty(propertyName);
             }
+            if (IgnoreInternalModels)
+            {
+                // this view model should not handle internal BaseDataModels explicitely
+                return;
+            }
             // check if this property is of type BaseDataModel too
             var prop = BaseDataModelProperties.FirstOrDefault(p => p.Name.Equals(propertyName));
             if (prop != null)
@@ -239,6 +255,10 @@
         /// <param name="child">The base data model.</param>
         private void AttachChildModelHandler(BaseDataModel child)
         {
+            if (child == null)
+            {
+                return;
+            }
             child.ErrorsChanged += (s, e) =>
             {
                 if (!(s is BaseDataModel model))
@@ -282,6 +302,11 @@
         #region properties
 
         /// <summary>
+        /// The amount of errors in the current instance.
+        /// </summary>
+        public int ErrorsCount => Errors.Count;
+
+        /// <summary>
         /// The opposite of <see cref="HasErrors" />.
         /// </summary>
         /// <remarks>
@@ -293,6 +318,16 @@
         /// Indicates if inner errors of properties should be collapsed to the first found error.
         /// </summary>
         protected virtual bool CollapseInnerDataErrors => true;
+
+        /// <summary>
+        /// Indicates whether internal <see cref="BaseDataModel" /> types should NOT be handled explicitely.
+        /// </summary>
+        protected virtual bool IgnoreInternalModels => false;
+
+        /// <summary>
+        /// Defines if <see cref="Validate" /> should be called on ctor.
+        /// </summary>
+        protected virtual bool ValidateOnInstantiation => false;
 
         /// <summary>
         /// Retrieves the property informations on all properties that are deriving from this type itself.

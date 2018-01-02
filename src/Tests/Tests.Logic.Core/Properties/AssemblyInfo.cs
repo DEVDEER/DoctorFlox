@@ -7,4 +7,4 @@ using System.Reflection;
 [assembly: AssemblyProduct("DoctorFlox")]
 [assembly: AssemblyCopyright("Copyright © DEVDEER 2017")]
 [assembly: AssemblyTrademark("DoctorFlox")]
-[assembly: AssemblyVersion("0.0.1.*")]
+[assembly: AssemblyVersion("0.2.2.*")]

@@ -1,11 +1,6 @@
-﻿using System;
-using System.Linq;
-
-namespace devdeer.DoctorFlox.Logic.Wpf.Helpers
+﻿namespace devdeer.DoctorFlox.Logic.Wpf.Helpers
 {
     using System;
-    using System;
-    using System.Linq;
     using System.Linq;
     using System.Reflection;
 
@@ -209,7 +204,6 @@ namespace devdeer.DoctorFlox.Logic.Wpf.Helpers
                     // WeakAction's lifetime.
                     Reference = new WeakReference(target);
                 }
-
                 return;
             }
             Method = action.Method;

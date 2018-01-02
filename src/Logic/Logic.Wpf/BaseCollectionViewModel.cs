@@ -24,15 +24,6 @@
     {
         #region member vars
 
-        /// <inheritdoc />
-        protected override void OnBeforeWatchedPropertiesDefined(List<PropertyInfo> collectedProperties)
-        {
-            base.OnBeforeWatchedPropertiesDefined(collectedProperties);
-            var unwantedProps = new [] { "Item" };
-            var propsToRemove = collectedProperties.Where(p => unwantedProps.Contains(p.Name)).ToList();
-            propsToRemove.ForEach(p => collectedProperties.Remove(p));
-        }
-
         /// <summary>
         /// Is used by the synchronization logic for multithreading.
         /// </summary>
@@ -264,6 +255,29 @@
             _isInPreview = false;
         }
 
+        /// <inheritdoc />
+        protected override void OnBeforeWatchedPropertiesDefined(List<PropertyInfo> collectedProperties)
+        {
+            base.OnBeforeWatchedPropertiesDefined(collectedProperties);
+            var unwantedProps = new[] { "Item" };
+            var propsToRemove = collectedProperties.Where(p => unwantedProps.Contains(p.Name)).ToList();
+            propsToRemove.ForEach(p => collectedProperties.Remove(p));
+        }
+
+        /// <summary>
+        /// Use this method to pass the content for <see cref="ItemsView" /> at design time.
+        /// </summary>
+        /// <param name="designTimeData">The data for the <see cref="ItemsView" />.</param>
+        protected void InitItemsDesignTime(IEnumerable<TItem> designTimeData)
+        {
+            if (!IsInDesignMode)
+            {
+                return;
+            }
+            Items = new ObservableCollection<TItem>(designTimeData);
+            ItemsView = new ListCollectionView(Items.ToList());
+        }
+
         /// <summary>
         /// Handler for the collection changed event of the internal data collection.
         /// </summary>
@@ -398,6 +412,9 @@
         /// of the item changes.
         /// </summary>
         public bool RefreshViewOnItemChange { get; set; }
+
+        /// <inheritdoc />
+        protected override bool IgnoreInternalModels => true;
 
         /// <summary>
         /// The internal list of data.

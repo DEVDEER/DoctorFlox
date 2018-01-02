@@ -93,11 +93,8 @@
     <None Include="FodyWeavers.xml" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Fody">
-      <Version>2.2.1</Version>
-    </PackageReference>
     <PackageReference Include="PropertyChanged.Fody">
-      <Version>2.1.4</Version>
+      <Version>2.2.4</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

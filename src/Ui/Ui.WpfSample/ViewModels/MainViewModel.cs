@@ -9,6 +9,8 @@
 
     using Autofac;
 
+    using Enumerations;
+
     using Helpers;
 
     using Logic.Wpf;
@@ -17,6 +19,8 @@
     using Logic.Wpf.Interfaces;
     using Logic.Wpf.Messages;
 
+    using Models.Messages;
+
     /// <summary>
     /// View model for the main window.
     /// </summary>
@@ -24,7 +28,14 @@
     {
         #region constructors and destructors
 
-        /// <inheritdoc />
+        public MainViewModel()
+        {
+        }
+
+        public MainViewModel(IMessenger messenger) : base(messenger)
+        {
+        }
+
         public MainViewModel(IMessenger messenger, SynchronizationContext synchronizationContext) : base(messenger, synchronizationContext)
         {
         }
@@ -53,12 +64,22 @@
             OpenChildWindowCommand = new RelayCommand(
                 () =>
                 {
+                    if (UseMessengerForWindowActions)
+                    {
+                        MessengerInstance.Send(new WindowOpenRequestMessage(WindowType.ChildWindow));
+                        return;
+                    }
                     var windowInstance = CreateWindowInstance("ChildWindow");
                     windowInstance?.ShowDialog();
                 });
             OpenCollectionWindowCommand = new RelayCommand(
                 () =>
                 {
+                    if (UseMessengerForWindowActions)
+                    {
+                        MessengerInstance.Send(new WindowOpenRequestMessage(WindowType.CollectionWindow));
+                        return;
+                    }
                     var windowInstance = CreateWindowInstance("CollectionWindow");
                     windowInstance?.ShowDialog();
                 });
@@ -68,14 +89,14 @@
         protected override void InitData()
         {
             base.InitData();
-            Caption = "WpfSample (Runtime)";
+            Caption = "DoctorFlox WpfSample (Runtime)";
         }
 
         /// <inheritdoc />
         protected override void InitDesignTimeData()
         {
             base.InitDesignTimeData();
-            Caption = "WpfSample (Design)";
+            Caption = "DoctorFlox WpfSample (Design)";
         }
 
         /// <inheritdoc />

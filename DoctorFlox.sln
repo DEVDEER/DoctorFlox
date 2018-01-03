@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27004.2005
+VisualStudioVersion = 15.0.27130.2010
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{900005BD-0FC4-4755-B52F-ECE6B81E1C56}"
 EndProject
@@ -26,6 +26,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{A4ED4C71-3350-41DD-A441-FF6BA76161E6}"
 	ProjectSection(SolutionItems) = preProject
 		build\ApplyVersionToAssemblies.ps1 = build\ApplyVersionToAssemblies.ps1
+		build\CheckNuGetVersion.ps1 = build\CheckNuGetVersion.ps1
 	EndProjectSection
 EndProject
 Global

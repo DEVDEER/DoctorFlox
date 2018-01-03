@@ -29,6 +29,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{A4ED4C71
 		build\CheckNuGetVersion.ps1 = build\CheckNuGetVersion.ps1
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ui.AutoWireupSample", "src\Ui\Ui.AutoWireupSample\Ui.AutoWireupSample.csproj", "{FFE51643-DE28-4743-A139-4DDBA518E3FC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +49,10 @@ Global
 		{4418596E-CED1-4D29-AAE9-AB36A475B8E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4418596E-CED1-4D29-AAE9-AB36A475B8E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4418596E-CED1-4D29-AAE9-AB36A475B8E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FFE51643-DE28-4743-A139-4DDBA518E3FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FFE51643-DE28-4743-A139-4DDBA518E3FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FFE51643-DE28-4743-A139-4DDBA518E3FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FFE51643-DE28-4743-A139-4DDBA518E3FC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -58,6 +64,7 @@ Global
 		{31F4D5AE-F265-48C2-A106-8A74CA3A4353} = {6E46E82E-38AD-4BD0-8770-4ABF1843912B}
 		{EBDD7360-D04C-48B0-A463-6C5DE5E99301} = {06A39AFE-B673-4398-A3BB-2CCE9DA25C05}
 		{4418596E-CED1-4D29-AAE9-AB36A475B8E4} = {0A1F398F-DA61-498C-8EF7-348A06B321DF}
+		{FFE51643-DE28-4743-A139-4DDBA518E3FC} = {06A39AFE-B673-4398-A3BB-2CCE9DA25C05}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6673B594-C7C6-412B-B5A3-9797458DAD5A}

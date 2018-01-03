@@ -1,0 +1,25 @@
+﻿<Window x:Class="devdeer.DoctorFlox.Ui.AutoWireupSample.Views.MainView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"         
+        xmlns:df="clr-namespace:devdeer.DoctorFlox.Logic.Wpf.Locators;assembly=DoctorFlox.Logic.Wpf"
+        df:AutoViewModelLocator.AutoWireViewModel="true"
+        mc:Ignorable="d"        
+        Title="{Binding Caption}" Height="204.268" Width="301.829" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Window.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="TextWrapping" Value="Wrap" />
+            <Setter Property="Margin" Value="2 2 2 5" />
+        </Style>
+    </Window.Resources>
+    <StackPanel Margin="10 20 10 10">
+        <TextBlock>
+            The title of this window is bound against a view model without dependency injection or anything else.
+        </TextBlock>
+        <TextBlock>
+            This works because we use the AutoViewModelLocator here which will resolve the view names by name and
+            using reflection.
+        </TextBlock>
+    </StackPanel>
+</Window>

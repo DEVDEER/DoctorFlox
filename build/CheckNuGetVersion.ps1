@@ -1,5 +1,5 @@
 # get local version out of nuspec
-$nuspec = Get-Content D:\git\DoctorFlox\src\Logic\Logic.Wpf\DoctorFlox.nuspec
+$nuspec = Get-Content DoctorFlox.nuspec
 $matches = [regex]::Match($nuspec, "<version>(.*?)<\/version>")
 $localVersion = $matches[0].Captures.Groups[1].Value
 # get version on nuget.org

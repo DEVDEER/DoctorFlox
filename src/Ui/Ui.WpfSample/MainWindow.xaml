@@ -10,10 +10,10 @@
         mc:Ignorable="d"
         Title="{Binding Caption}"
         Height="470"
-        Width="500"
+        Width="670"
         MinHeight="470"
-        MinWidth="500"
-        WindowStartupLocation="CenterScreen" 
+        MinWidth="670"
+        WindowStartupLocation="CenterScreen"
         DataContext="{Binding MainViewModel, Source={StaticResource Locator}}"
         IsEnabled="{Binding IsValid, Source={StaticResource MessageListener}}">
     <i:Interaction.Triggers>
@@ -22,8 +22,8 @@
         </i:EventTrigger>
     </i:Interaction.Triggers>
     <Window.Resources>
-        <Style TargetType="TextBlock" BasedOn="{StaticResource Hint}">
-        </Style>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource Hint}" />
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -31,11 +31,10 @@
             <RowDefinition />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
         </Grid.ColumnDefinitions>
-
         <GroupBox Grid.Row="0" Grid.Column="0" Header="View Resolving">
             <Grid>
                 <Grid.RowDefinitions>
@@ -49,35 +48,34 @@
                 <Label Grid.Row="1" Content="{Binding AssociatedView.Title}" />
             </Grid>
         </GroupBox>
-
         <GroupBox Grid.Row="0" Grid.Column="1" Header="Command Binding">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
+                    <RowDefinition />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <TextBlock Grid.Row="0">
                     Enter a text in the field below and see how the button will change it's state due to the command binding.
                 </TextBlock>
-                <TextBox Grid.Row="1" Text="{Binding TestMessage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                <TextBox Grid.Row="1" Text="{Binding TestMessage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 <Button Grid.Row="2" Content="Show Message" Command="{Binding ShowMessageCommand}" />
             </Grid>
         </GroupBox>
-
         <GroupBox Grid.Row="0" Grid.Column="2" Header="View Control">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
+                    <RowDefinition />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <TextBlock Grid.Row="0">
                     Use the buttons to open other views from within this BaseViewModel. If you check the 'UseMessenger' below, the logic
                     will switch to Messenger-based window-opening instead of using reflection-based logic.
                 </TextBlock>
-                <CheckBox Grid.Row="1" Content="Use Messenger" IsChecked="{Binding UseMessengerForWindowActions, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                <CheckBox Grid.Row="1" Content="Use Messenger"
+                          IsChecked="{Binding UseMessengerForWindowActions, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 <Button Grid.Row="2" Content="Show Child" Command="{Binding OpenChildWindowCommand}" />
                 <Button Grid.Row="3" Content="Show List Window" Command="{Binding OpenCollectionWindowCommand}" />
             </Grid>
@@ -93,6 +91,24 @@
                     the profe of the fact that each view model will find it's view even if there is more than one bound.
                 </TextBlock>
                 <Button Grid.Row="1" Content="Open 3 windows" Command="{Binding OpenMultiWindowCommand}" />
+            </Grid>
+        </GroupBox>
+        <GroupBox Grid.Row="1" Grid.Column="1" Header="Async Messenger on UI thread">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition Height="20" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0">
+                    When you click the button, a progress will be changed asynchronously using a message without the need of DispatcherHelper for UI-thread-sync. Use the checkbox to see
+                    how the button is automatically enabled und disabled when it's checked. This uses 'EnforceRaisePropertyChanged'.
+                </TextBlock>
+                <ProgressBar Grid.Row="1" Value="{Binding Progress, Mode=OneWay}"
+                             Visibility="{Binding IsProgressOperationRunning, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                <CheckBox Grid.Row="2" Content="Enforce property changed" IsChecked="{Binding EnforceRaisePropertyChanged}" />
+                <Button Grid.Row="3" Content="Run Async Action" Command="{Binding TestAsyncMessengerCommand}" />
             </Grid>
         </GroupBox>
     </Grid>

@@ -8,4 +8,4 @@ $versions = Invoke-WebRequest $url | ConvertFrom-Json | Select -expand versions
 $nugetVersion = $versions[$versions.Length - 1]
 # compare versions
 $result = $localVersion.Equals($nugetVersion)
-Write-Host ("##vso[task.setvariable variable=PackageVersion.Patch;]$result")
+Write-Host ("##vso[task.setvariable variable=NuGet.PushRequired;]$result")

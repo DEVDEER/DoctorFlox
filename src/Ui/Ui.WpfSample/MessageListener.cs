@@ -6,6 +6,7 @@
 
     using Enumerations;
 
+    using Logic.Wpf;
     using Logic.Wpf.Messages;
 
     using Models.Messages;
@@ -19,6 +20,10 @@
 
         public MessageListener()
         {
+            if (BaseViewModel.IsInDesignModeStatic)
+            {
+                return;
+            }
             RegisterMessages();
         }
 

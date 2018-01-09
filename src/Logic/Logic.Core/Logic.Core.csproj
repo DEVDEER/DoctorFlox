@@ -4,6 +4,16 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>DoctorFlox.Logic.Core</AssemblyName>
     <RootNamespace>devdeer.DoctorFlox</RootNamespace>
+    <PackageId>devdeer.DoctorFlox</PackageId>
+    <PackageVersion>0.3.0-beta</PackageVersion>
+    <Authors>DEVDEER</Authors>
+    <Description>An Open Source MVVM framework for .NET Framework.</Description>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <PackageReleaseNotes>Logic is now based on .NET Standard 2.0. BREAKING CHANGE BECAUSE NEW NAMESPACE IS devdeer.DoctorFlox only.</PackageReleaseNotes>
+    <Copyright>Copyright 2017-2018 (c) DEVDEER</Copyright>
+    <PackageProjectUrl>https://github.com/devdeer/DoctorFlox</PackageProjectUrl>
+    <PackageIconUrl>https://devdeer.blob.core.windows.net/shared/doctorflox/doctorflox_64.png</PackageIconUrl>
+    <PackageTags>DEVDEER,MVVM,WPF,.NET</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
@@ -28,4 +38,5 @@
     </Reference>
   </ItemGroup>
 
+  
 </Project>

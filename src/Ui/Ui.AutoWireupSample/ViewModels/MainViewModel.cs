@@ -3,8 +3,8 @@
     using System;
     using System.Linq;
 
-    using Logic.Wpf;
-    using Logic.Wpf.Locators;
+    
+    using Locators;
 
     using Views;
 

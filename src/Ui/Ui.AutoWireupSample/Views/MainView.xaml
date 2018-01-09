@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"         
-        xmlns:df="clr-namespace:devdeer.DoctorFlox.Logic.Wpf.Locators;assembly=DoctorFlox.Logic.Wpf"
+        xmlns:df="clr-namespace:devdeer.DoctorFlox.Locators;assembly=DoctorFlox.Logic.Core"
         df:AutoViewModelLocator.AutoWireViewModel="true"
         mc:Ignorable="d"        
         Title="{Binding Caption}" Height="204.268" Width="301.829" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">

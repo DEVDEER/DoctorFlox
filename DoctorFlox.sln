@@ -19,8 +19,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logic.Wpf", "src\Logic\Logi
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "libs", "libs", "{CB223450-EA6D-4513-9DBE-2BA9CEAA4C46}"
 	ProjectSection(SolutionItems) = preProject
+		libs\PresentationCore.dll = libs\PresentationCore.dll
+		libs\PresentationCore.xml = libs\PresentationCore.xml
+		libs\System.ComponentModel.DataAnnotations.dll = libs\System.ComponentModel.DataAnnotations.dll
+		libs\System.ComponentModel.DataAnnotations.xml = libs\System.ComponentModel.DataAnnotations.xml
 		libs\System.Windows.Interactivity.dll = libs\System.Windows.Interactivity.dll
 		libs\System.Windows.Interactivity.xml = libs\System.Windows.Interactivity.xml
+		libs\WindowsBase.dll = libs\WindowsBase.dll
+		libs\WindowsBase.xml = libs\WindowsBase.xml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{A4ED4C71-3350-41DD-A441-FF6BA76161E6}"

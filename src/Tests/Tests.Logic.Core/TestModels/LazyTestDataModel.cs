@@ -3,7 +3,7 @@
     using System;
     using System.Linq;
 
-    using devdeer.DoctorFlox.Logic.Wpf;
+    using devdeer.DoctorFlox;
 
     /// <summary>
     /// Can be used by tests to get a <see cref="BaseDataModel" /> which has

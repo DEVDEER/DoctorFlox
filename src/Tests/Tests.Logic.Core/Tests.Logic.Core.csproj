@@ -65,13 +65,13 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Logic\Logic.Wpf\Logic.Wpf.csproj">
-      <Project>{4418596e-ced1-4d29-aae9-ab36a475b8e4}</Project>
-      <Name>Logic.Wpf</Name>
-    </ProjectReference>
+    <None Include="FodyWeavers.xml" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="FodyWeavers.xml" />
+    <ProjectReference Include="..\..\Logic\Logic.Core\Logic.Core.csproj">
+      <Project>{f3a458ed-2858-4916-b108-3bbee752c5f8}</Project>
+      <Name>Logic.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

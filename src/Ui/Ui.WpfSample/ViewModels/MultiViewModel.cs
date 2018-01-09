@@ -5,9 +5,9 @@
     using System.Threading;
     using System.Windows;
 
-    using Logic.Wpf;
-    using Logic.Wpf.Commands;
-    using Logic.Wpf.Interfaces;
+    
+    using Commands;
+    using Interfaces;
 
     /// <summary>
     /// The view model for the multi window which is used in multiple windows.

@@ -9,6 +9,8 @@
 
     using Autofac;
 
+    using DoctorFlox.Helpers;
+
     using Helpers;
 
     

@@ -8,6 +8,9 @@
 
     
     using Commands;
+
+    using DoctorFlox.Enumerations;
+
     using Enumerations;
     using Interfaces;
     using Messages;

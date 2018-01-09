@@ -5,9 +5,9 @@
     using System.Linq;
     using System.Threading;
 
-    using Logic.Wpf;
-    using Logic.Wpf.Attributes;
-    using Logic.Wpf.Interfaces;
+    
+    using Attributes;
+    using Interfaces;
 
     using Models;
 

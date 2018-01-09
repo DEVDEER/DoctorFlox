@@ -5,7 +5,7 @@
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
 
-    using devdeer.DoctorFlox.Logic.Wpf;
+    using devdeer.DoctorFlox;
 
     /// <summary>
     /// A type used in internal tests for <see cref="BaseDataModel" />.

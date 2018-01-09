@@ -4,7 +4,7 @@
     using System.ComponentModel;
     using System.Linq;
 
-    using devdeer.DoctorFlox.Logic.Wpf;
+    using devdeer.DoctorFlox;
 
     /// <summary>
     /// A type used in internal tests for <see cref="BaseObservableObject" />.

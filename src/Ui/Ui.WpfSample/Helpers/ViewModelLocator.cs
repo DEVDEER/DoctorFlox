@@ -5,7 +5,7 @@
 
     using Autofac;
 
-    using Logic.Wpf;
+    
 
     using ViewModels;
 

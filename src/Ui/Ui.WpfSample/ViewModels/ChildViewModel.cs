@@ -6,11 +6,14 @@
     using System.Runtime.CompilerServices;
     using System.Threading;
 
-    using Logic.Wpf;
-    using Logic.Wpf.Commands;
-    using Logic.Wpf.Enumerations;
-    using Logic.Wpf.Interfaces;
-    using Logic.Wpf.Messages;
+    
+    using Commands;
+
+    using DoctorFlox.Enumerations;
+
+    using Enumerations;
+    using Interfaces;
+    using Messages;
 
     using Models;
 

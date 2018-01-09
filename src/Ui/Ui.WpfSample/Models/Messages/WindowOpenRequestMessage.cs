@@ -3,9 +3,9 @@
     using System;
     using System.Linq;
 
-    using Enumerations;
+    using DoctorFlox.Messages;
 
-    using Logic.Wpf.Messages;
+    using Enumerations;
 
     /// <summary>
     /// Is sent by a view model to signal that it wants to open a certain window.

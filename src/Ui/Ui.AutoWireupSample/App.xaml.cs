@@ -4,7 +4,7 @@
     using System.Linq;
     using System.Windows;
 
-    using Logic.Wpf.Locators;
+    using Locators;
 
     /// <summary>
     /// Interaction logic for App.xaml

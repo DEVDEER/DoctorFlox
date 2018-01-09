@@ -4,7 +4,7 @@
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
 
-    using Logic.Wpf;
+    
 
     using Resources;
 

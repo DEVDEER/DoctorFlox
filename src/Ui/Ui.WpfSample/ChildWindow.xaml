@@ -3,10 +3,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:mvvm="clr-namespace:devdeer.DoctorFlox.Logic.Wpf;assembly=DoctorFlox.Logic.Wpf"
+        xmlns:mvvm="clr-namespace:devdeer.DoctorFlox;assembly=DoctorFlox.Logic.Core"
         xmlns:local="clr-namespace:devdeer.DoctorFlox.Ui.WpfSample"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-        xmlns:Commands="clr-namespace:devdeer.DoctorFlox.Logic.Wpf.Commands;assembly=DoctorFlox.Logic.Wpf"
+        xmlns:Commands="clr-namespace:devdeer.DoctorFlox.Commands;assembly=DoctorFlox.Logic.Core"
         mc:Ignorable="d"
         Title="Bind Tests" Height="250" Width="300" 
         DataContext="{Binding ChildViewModel, Source={StaticResource Locator}}" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">

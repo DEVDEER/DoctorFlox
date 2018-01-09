@@ -9,13 +9,15 @@
 
     using Autofac;
 
+    using DoctorFlox.Helpers;
+
     using Helpers;
 
-    using Logic.Wpf;
-    using Logic.Wpf.Helpers;
-    using Logic.Wpf.Interfaces;
-    using Logic.Wpf.Locators;
-    using Logic.Wpf.Messages;
+    
+    using Helpers;
+    using Interfaces;
+    using Locators;
+    using Messages;
 
     /// <summary>
     /// Interaction logic for App.xaml

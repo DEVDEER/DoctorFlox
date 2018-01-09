@@ -5,7 +5,7 @@
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
 
-    using devdeer.DoctorFlox.Logic.Wpf;
+    using devdeer.DoctorFlox;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 

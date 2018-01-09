@@ -6,8 +6,8 @@
 
     using Enumerations;
 
-    using Logic.Wpf;
-    using Logic.Wpf.Messages;
+    
+    using Messages;
 
     using Models.Messages;
 

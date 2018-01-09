@@ -1,6 +1,6 @@
 # get local version out of nuspec
-$nuspec = Get-Content DoctorFlox.nuspec
-$matches = [regex]::Match($nuspec, "<version>(.*?)<\/version>")
+$nuspec = Get-Content Logic.Core.csproj
+$matches = [regex]::Match($nuspec, "<PackageVersion>(.*?)<\/PackageVersion>")
 $localVersion = $matches[0].Captures.Groups[1].Value
 # get version on nuget.org
 $url = "https://api.nuget.org/v3-flatcontainer/devdeer.DoctorFlox/index.json"

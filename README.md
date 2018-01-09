@@ -2,7 +2,15 @@
 ## Introduction
 DoctorFlox is a lightweight MVVM library for .NET. It is taking a lot of code and ideas from [MVVM Light Toolkit](http://www.mvvmlight.net/) by Laurant Bugnion because the latter is not maintained anymore. We also took ideas and code from [Prism](https://github.com/PrismLibrary/Prism) because they told us that WPF is not in their focus anymore (see this [Issue](https://github.com/PrismLibrary/Prism/issues/1211)).
 
-We polished the source code and got rid of the Silverlight and DotnetFx components. We concentrate on the full .NET Framework currently. Future releases might involve .NET Core components too.
+We polished the source code and got rid of the Silverlight and DotnetFx components. We developed the logic targetting .NET Standard 2.0 which means, that we currently support the following targets in principle:
+
+- .NET Frameworkwork 4.6.1+
+- .NET Core 2.0+
+- Mono 5.4+
+- Xamarin.iOS 10.14+
+- UWP 10.0.16299+
+
+DoctorFlox needs references to certain libs which currently means that the project is targetting WPF-projects only!
 
 ## DoctorFlox?
 

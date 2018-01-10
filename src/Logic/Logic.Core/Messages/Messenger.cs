@@ -290,6 +290,10 @@
                             Task.Run(() => executeAction.ExecuteWithObject(message));
                             break;
                         case ThreadCallbackOption.UiThread:
+                            if (_synchronizationContext == null)
+                            {
+                                throw new InvalidOperationException("Cannot switch to UI thread because no synchronization context is defined currently.");
+                            }
                             _synchronizationContext.Post(o => executeAction.ExecuteWithObject(message), null);
                             break;
                     }

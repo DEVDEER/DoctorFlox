@@ -3,6 +3,7 @@
     using System;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
+    using System.Windows;
 
     using Extensions;
 
@@ -17,7 +18,7 @@
 
         /// <inheritdoc />
         protected override ValidationAttributeCheckResult InternalCheck(StringLengthAttribute attribute, object currentValue)
-        {
+        {            
             if ((currentValue?.ToString().Length ?? 0) < attribute.MinimumLength || (currentValue?.ToString().Length ?? 0) > attribute.MaximumLength)
             {
                 return new ValidationAttributeCheckResult(false, attribute.ResolveErrorMessage());

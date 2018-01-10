@@ -62,6 +62,7 @@
     <Compile Include="TestModels\LazyTestDataModel.cs" />
     <Compile Include="TestModels\TestDataModel.cs" />
     <Compile Include="TestModels\TestObservable.cs" />
+    <Compile Include="ValidationAttributeCheckResultTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="CodeCoverage.runsettings" />

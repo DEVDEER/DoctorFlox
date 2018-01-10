@@ -88,6 +88,15 @@ namespace deveer.DoctorFlox.Tests.Logic.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The salary must be between 1000 and 100000 per month..
+        /// </summary>
+        public static string SalaryErrorMessage {
+            get {
+                return ResourceManager.GetString("SalaryErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Length must be between 1 and 50 characters..
         /// </summary>
         public static string StringLengthErrorMessage {

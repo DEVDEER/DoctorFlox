@@ -126,6 +126,9 @@
   <data name="RequiredErrorMessage" xml:space="preserve">
     <value>This value is required.</value>
   </data>
+  <data name="SalaryErrorMessage" xml:space="preserve">
+    <value>The salary must be between 1000 and 100000 per month.</value>
+  </data>
   <data name="StringLengthErrorMessage" xml:space="preserve">
     <value>Length must be between 1 and 50 characters.</value>
   </data>

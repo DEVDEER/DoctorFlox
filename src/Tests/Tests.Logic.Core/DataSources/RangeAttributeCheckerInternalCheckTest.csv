@@ -1,0 +1,12 @@
+﻿ExpectedResult,ExpectedErrorMessageSalary,Salary
+false,"SalaryErrorMessage",NULL
+false,"SalaryErrorMessage",1
+false,"SalaryErrorMessage",0
+false,"SalaryErrorMessage",999
+false,"SalaryErrorMessage",100001
+false,"SalaryErrorMessage",1000000
+true,NULL,1500
+true,NULL,98000
+true,NULL,99999
+true,NULL,1000
+true,NULL,5920

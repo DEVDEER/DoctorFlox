@@ -41,6 +41,12 @@
         public string Firstname { get; set; }
 
         /// <summary>
+        /// A random key for the person (5 chars uppercase).
+        /// </summary>
+        [RegularExpression("^[A-Z]{5}$", ErrorMessageResourceType = typeof(TestResources), ErrorMessageResourceName = "KeyErrorMessage")]
+        public string Key { get; set; }
+
+        /// <summary>
         /// The lastname of a person with 50 chars max.
         /// </summary>
         [Required(ErrorMessageResourceType = typeof(TestResources), ErrorMessageResourceName = "RequiredErrorMessage")]
@@ -53,15 +59,15 @@
         public string Lastname { get; set; }
 
         /// <summary>
-        /// A random key for the person (5 chars uppercase).
-        /// </summary>
-        [RegularExpression("^[A-Z]{5}$", ErrorMessageResourceType = typeof(TestResources), ErrorMessageResourceName = "KeyErrorMessage")]
-        public string Key { get; set; }
-
-        /// <summary>
         /// A person that is related to this person.
         /// </summary>
         public TestDataModel Related { get; set; }
+
+        /// <summary>
+        /// The monthly salary of this person.
+        /// </summary>
+        [Range(Variables.SalaryMinValue, Variables.SalaryMaxValue, ErrorMessageResourceType = typeof(TestResources), ErrorMessageResourceName = "SalaryErrorMessage")]
+        public int Salary { get; set; }
 
         /// <inheritdoc />
         protected override bool ValidateOnInstantiation => true;

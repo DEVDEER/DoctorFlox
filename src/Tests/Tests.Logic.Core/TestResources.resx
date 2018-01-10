@@ -123,6 +123,9 @@
   <data name="MaxLengthErrorMessage" xml:space="preserve">
     <value>A maximum of 50 chars is allowed.</value>
   </data>
+  <data name="MinLengthErrorMessage" xml:space="preserve">
+    <value>This value must have at least 1 char.</value>
+  </data>
   <data name="RequiredErrorMessage" xml:space="preserve">
     <value>This value is required.</value>
   </data>

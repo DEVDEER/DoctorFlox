@@ -65,6 +65,7 @@
     <Compile Include="RangeAttributeCheckerTests.cs" />
     <Compile Include="RegularExpressionAttributeCheckerTests.cs" />
     <Compile Include="RequiredAttributeCheckerTests.cs" />
+    <Compile Include="MinLengthAttributeCheckerTests.cs" />
     <Compile Include="TestResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -87,6 +88,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="DataSources\RequiredAttributeCheckerInternalCheckTest.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="DataSources\MinLengthAttributeCheckerInternalCheckTest.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="DataSources\StringLengthAttributeCheckerInternalCheckTest.csv">

@@ -32,7 +32,8 @@
         /// The firstname of a person with 50 chars max.
         /// </summary>
         [Required(ErrorMessageResourceType = typeof(TestResources), ErrorMessageResourceName = "RequiredErrorMessage")]
-        [MaxLength(Variables.MaxStringLengthInTestModels, ErrorMessageResourceType = typeof(TestResources), ErrorMessageResourceName = "MaxLengthErrorMessage")]
+        [MinLength(Variables.MinStringLengthInTestModels, ErrorMessageResourceType = typeof(TestResources), ErrorMessageResourceName = "MinLengthErrorMessage")]
+        [MaxLength(Variables.MaxStringLengthInTestModels, ErrorMessageResourceType = typeof(TestResources), ErrorMessageResourceName = "MaxLengthErrorMessage")]        
         [StringLength(
             Variables.MaxStringLengthInTestModels,
             MinimumLength = Variables.MinStringLengthInTestModels,
@@ -50,6 +51,7 @@
         /// The lastname of a person with 50 chars max.
         /// </summary>
         [Required(ErrorMessageResourceType = typeof(TestResources), ErrorMessageResourceName = "RequiredErrorMessage")]
+        [MinLength(Variables.MinStringLengthInTestModels, ErrorMessageResourceType = typeof(TestResources), ErrorMessageResourceName = "MinLengthErrorMessage")]
         [MaxLength(Variables.MaxStringLengthInTestModels, ErrorMessageResourceType = typeof(TestResources), ErrorMessageResourceName = "MaxLengthErrorMessage")]
         [StringLength(
             Variables.MaxStringLengthInTestModels,

@@ -79,6 +79,15 @@ namespace deveer.DoctorFlox.Tests.Logic.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This value must have at least 1 char..
+        /// </summary>
+        public static string MinLengthErrorMessage {
+            get {
+                return ResourceManager.GetString("MinLengthErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This value is required..
         /// </summary>
         public static string RequiredErrorMessage {

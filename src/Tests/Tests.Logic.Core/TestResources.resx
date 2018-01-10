@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="KeyErrorMessage" xml:space="preserve">
+    <value>The key must be exactly 5 chars long and consist only of upper-case chars.</value>
+  </data>
   <data name="MaxLengthErrorMessage" xml:space="preserve">
     <value>A maximum of 50 chars is allowed.</value>
   </data>

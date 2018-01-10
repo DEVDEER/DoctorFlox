@@ -37,6 +37,7 @@
             // act 
             testObject.Firstname = Guid.NewGuid().ToString();
             testObject.Lastname = Guid.NewGuid().ToString();
+            testObject.Key = "ABCDE";
             // assert 
             Assert.AreEqual(2, errorEventsRaised.Count);
             Assert.IsFalse(testObject.HasErrors);

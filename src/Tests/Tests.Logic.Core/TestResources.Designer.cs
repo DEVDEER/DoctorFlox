@@ -61,6 +61,15 @@ namespace deveer.DoctorFlox.Tests.Logic.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The key must be exactly 5 chars long and consist only of upper-case chars..
+        /// </summary>
+        public static string KeyErrorMessage {
+            get {
+                return ResourceManager.GetString("KeyErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to A maximum of 50 chars is allowed..
         /// </summary>
         public static string MaxLengthErrorMessage {

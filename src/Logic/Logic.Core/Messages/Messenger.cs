@@ -160,6 +160,9 @@
 
         #region methods
 
+        /// <summary>
+        /// Is used to get rid of registrations and internal ressources no longer needed.
+        /// </summary>
         public void Cleanup()
         {
             CleanupList(_derivedRegistrations);

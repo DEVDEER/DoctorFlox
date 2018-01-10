@@ -31,15 +31,25 @@
         /// <summary>
         /// The firstname of a person with 50 chars max.
         /// </summary>
-        [Required]
-        [MaxLength(50)]
+        [Required(ErrorMessageResourceType = typeof(TestResources), ErrorMessageResourceName = "RequiredErrorMessage")]
+        [MaxLength(Variables.MaxStringLengthInTestModels, ErrorMessageResourceType = typeof(TestResources), ErrorMessageResourceName = "MaxLengthErrorMessage")]
+        [StringLength(
+            Variables.MaxStringLengthInTestModels,
+            MinimumLength = Variables.MinStringLengthInTestModels,
+            ErrorMessageResourceType = typeof(TestResources),
+            ErrorMessageResourceName = "StringLengthErrorMessage")]
         public string Firstname { get; set; }
 
         /// <summary>
         /// The lastname of a person with 50 chars max.
         /// </summary>
-        [Required]
-        [MaxLength(50)]
+        [Required(ErrorMessageResourceType = typeof(TestResources), ErrorMessageResourceName = "RequiredErrorMessage")]
+        [MaxLength(Variables.MaxStringLengthInTestModels, ErrorMessageResourceType = typeof(TestResources), ErrorMessageResourceName = "MaxLengthErrorMessage")]
+        [StringLength(
+            Variables.MaxStringLengthInTestModels,
+            MinimumLength = Variables.MinStringLengthInTestModels,
+            ErrorMessageResourceType = typeof(TestResources),
+            ErrorMessageResourceName = "StringLengthErrorMessage")]
         public string Lastname { get; set; }
 
         /// <summary>

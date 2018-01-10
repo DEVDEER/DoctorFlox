@@ -1,0 +1,8 @@
+﻿ExpectedFirstnameValid,ExpectedFirstnameErrorMessageKey,ExpectedLastnameValid,ExpectedLastnameErrorMessageKey,Firstname,Lastname,Birthday
+false,"StringLengthErrorMessage",false,"StringLengthErrorMessage",NULL,NULL
+true,NULL,true,NULL,"Klaus","Mustermann",NULL
+true,NULL,true,NULL,"Klaus","Mustermann","1955-12-03"
+false,"StringLengthErrorMessage",true,NULL,,"Mustermann","1955-12-03"
+true,NULL,false,"StringLengthErrorMessage","Klaus",,"1955-12-03"
+false,"StringLengthErrorMessage",true,NULL,NULL,"Mustermann","1955-12-03"
+true,NULL,false,"StringLengthErrorMessage","Klaus",NULL,"1955-12-03"

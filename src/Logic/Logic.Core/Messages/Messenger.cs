@@ -160,6 +160,9 @@
 
         #region methods
 
+        /// <summary>
+        /// Is used to get rid of registrations and internal ressources no longer needed.
+        /// </summary>
         public void Cleanup()
         {
             CleanupList(_derivedRegistrations);
@@ -205,6 +208,9 @@
         /// <summary>
         /// Sets the Messenger's default (static) instance to null.
         /// </summary>
+        /// <remarks>
+        /// Be sure to call this method whenever the synchronization context changes.
+        /// </remarks>
         public static void Reset()
         {
             lock (MessengerLock)
@@ -287,6 +293,10 @@
                             Task.Run(() => executeAction.ExecuteWithObject(message));
                             break;
                         case ThreadCallbackOption.UiThread:
+                            if (_synchronizationContext == null)
+                            {
+                                throw new InvalidOperationException("Cannot switch to UI thread because no synchronization context is not defined currently.");
+                            }
                             _synchronizationContext.Post(o => executeAction.ExecuteWithObject(message), null);
                             break;
                     }

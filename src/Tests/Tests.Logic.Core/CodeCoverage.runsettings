@@ -7,9 +7,9 @@
         <Configuration>
           <CodeCoverage>
             <ModulePaths>
-              <Exclude>
-                <ModulePath>.*Tests.Logic.Core.dll$</ModulePath>
-              </Exclude>
+              <Include>
+                <ModulePath>.*DoctorFlox.Logic.Core.dll$</ModulePath>
+              </Include>
             </ModulePaths>
           </CodeCoverage>
         </Configuration>

@@ -24,8 +24,8 @@
         /// Tests the sending and receiving of <see cref="DataMessage{TData}" /> elements using the <see cref="Messenger" />.
         /// </summary>
         [TestMethod]
-        public async Task MessengerDataMessageTest()
-        {            
+        public void MessengerDataMessageTest()
+        {
             // arrange
             var messageWithValue = new DataMessage<object, object, int>(10);
             var messageWithValeAndSender = new DataMessage<object, object, string>(this, "10");
@@ -86,11 +86,28 @@
         }
 
         /// <summary>
+        /// Tests if the <see cref="Messenger.ResetAll" /> method will force the messenger to be re-instantiated.
+        /// </summary>
+        [TestMethod]
+        public void MessengerResetAllTest()
+        {
+            // arrange
+            var firstMessenger = Messenger.Default;
+            var secondMessenger = Messenger.Default;
+            // act
+            (Messenger.Default as Messenger)?.ResetAll();
+            var thirdMessenger = Messenger.Default;
+            // assert
+            Assert.AreEqual(firstMessenger, secondMessenger);
+            Assert.AreNotEqual(firstMessenger, thirdMessenger);
+        }
+
+        /// <summary>
         /// Tests if the <see cref="Messenger.Reset" /> method will force the messenger to be re-instantiated.
         /// </summary>
         [TestMethod]
         public void MessengerResetTest()
-        {            
+        {
             // arrange
             var firstMessenger = Messenger.Default;
             var secondMessenger = Messenger.Default;
@@ -99,13 +116,38 @@
             var thirdMessenger = Messenger.Default;
             // assert
             Assert.AreEqual(firstMessenger, secondMessenger);
-            Assert.AreNotEqual(firstMessenger, thirdMessenger);            
+            Assert.AreNotEqual(firstMessenger, thirdMessenger);
         }
 
-    
         /// <summary>
         /// Tests if the
-        /// <see cref="Messenger.Register{TMessage}(object,devdeer.DoctorFlox.Enumerations.ThreadCallbackOption,System.Action{TMessage})" />
+        /// <see cref="Messenger.Register{TMessage}(object,ThreadCallbackOption,Action{TMessage})" /> throws an
+        /// <see cref="InvalidOperationException" /> if
+        /// no synchronization context is provided.
+        /// </summary>
+        [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public async Task MessengerThreadCallbackExceptionTest()
+        {
+            SynchronizationContext.SetSynchronizationContext(null);
+            Messenger.Reset();
+            // act        
+            Messenger.Default.Register<Message>(
+                this,
+                ThreadCallbackOption.UiThread,
+                msg =>
+                {
+                });
+            await Task.Run(
+                () =>
+                {
+                    Messenger.Default.Send(new Message(this));
+                });
+        }
+
+        /// <summary>
+        /// Tests if the
+        /// <see cref="Messenger.Register{TMessage}(object,ThreadCallbackOption,Action{TMessage})" />
         /// operates on the expected thread.
         /// </summary>
         [TestMethod]
@@ -122,6 +164,7 @@
             TestHandler.RunInWpfSyncContext(
                 async () =>
                 {
+                    Messenger.Reset();
                     Messenger.Default.Register<Message>(
                         this,
                         ThreadCallbackOption.Sender,
@@ -135,7 +178,7 @@
                         ThreadCallbackOption.ThreadPool,
                         msg =>
                         {
-                            threadPoolThreadOk = Thread.CurrentThread.ManagedThreadId != senderThreadId;
+                            threadPoolThreadOk = Thread.CurrentThread.IsThreadPoolThread;
                             Interlocked.Increment(ref handled);
                         });
                     Messenger.Default.Register<Message>(
@@ -156,7 +199,7 @@
                     {
                         await Task.Delay(10);
                     }
-                });            
+                });
             // assert
             Assert.IsTrue(senderThreadOk, "Message is not consumed on sender thread.");
             Assert.IsTrue(threadPoolThreadOk, "Message is not consumed on thread-pool-thread.");

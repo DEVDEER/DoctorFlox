@@ -208,6 +208,9 @@
         /// <summary>
         /// Sets the Messenger's default (static) instance to null.
         /// </summary>
+        /// <remarks>
+        /// Be sure to call this method whenever the synchronization context changes.
+        /// </remarks>
         public static void Reset()
         {
             lock (MessengerLock)
@@ -292,7 +295,7 @@
                         case ThreadCallbackOption.UiThread:
                             if (_synchronizationContext == null)
                             {
-                                throw new InvalidOperationException("Cannot switch to UI thread because no synchronization context is defined currently.");
+                                throw new InvalidOperationException("Cannot switch to UI thread because no synchronization context is not defined currently.");
                             }
                             _synchronizationContext.Post(o => executeAction.ExecuteWithObject(message), null);
                             break;

@@ -53,6 +53,12 @@
         public string Lastname { get; set; }
 
         /// <summary>
+        /// A random key for the person (5 chars uppercase).
+        /// </summary>
+        [RegularExpression("^[A-Z]{5}$", ErrorMessageResourceType = typeof(TestResources), ErrorMessageResourceName = "KeyErrorMessage")]
+        public string Key { get; set; }
+
+        /// <summary>
         /// A person that is related to this person.
         /// </summary>
         public TestDataModel Related { get; set; }

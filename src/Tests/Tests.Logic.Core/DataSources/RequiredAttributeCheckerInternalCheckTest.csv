@@ -1,0 +1,8 @@
+﻿ExpectedFirstnameValid,ExpectedFirstnameErrorMessageKey,ExpectedLastnameValid,ExpectedLastnameErrorMessageKey,Firstname,Lastname,Birthday
+false,"RequiredErrorMessage",false,"RequiredErrorMessage",NULL,NULL
+true,NULL,true,NULL,"Klaus","Mustermann",NULL
+true,NULL,true,NULL,"Klaus","Mustermann","1955-12-03"
+false,"RequiredErrorMessage",true,NULL,,"Mustermann","1955-12-03"
+true,NULL,false,"RequiredErrorMessage","Klaus",,"1955-12-03"
+false,"RequiredErrorMessage",true,NULL,NULL,"Mustermann","1955-12-03"
+true,NULL,false,"RequiredErrorMessage","Klaus",NULL,"1955-12-03"

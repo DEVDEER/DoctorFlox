@@ -38,8 +38,9 @@
             testObject.Firstname = Guid.NewGuid().ToString();
             testObject.Lastname = Guid.NewGuid().ToString();
             testObject.Key = "ABCDE";
+            testObject.Salary = 2000;
             // assert 
-            Assert.AreEqual(2, errorEventsRaised.Count);
+            Assert.AreEqual(3, errorEventsRaised.Count);
             Assert.IsFalse(testObject.HasErrors);
             Assert.IsTrue(testObject.IsOk);
         }
@@ -51,7 +52,7 @@
         public void BaseDataModelErrorsPresentOnInitTest()
         {
             // arrange
-            const int ExpectedErrorsCount = 2;
+            const int ExpectedErrorsCount = 3;
             // act
             var testObject = new TestDataModel
             {

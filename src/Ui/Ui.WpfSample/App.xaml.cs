@@ -1,7 +1,6 @@
 ﻿namespace devdeer.DoctorFlox.Ui.WpfSample
 {
     using System;
-    using System.Diagnostics;
     using System.Linq;
     using System.Reflection;
     using System.Threading;
@@ -13,10 +12,10 @@
 
     using Helpers;
 
-    
-    using Helpers;
     using Interfaces;
+
     using Locators;
+
     using Messages;
 
     /// <summary>
@@ -42,8 +41,8 @@
             Assembly.GetExecutingAssembly().GetTypes().Where(t => !t.IsAbstract && t.IsPublic && typeof(BaseViewModel).IsAssignableFrom(t)).ToList().ForEach(
                 viewModelType =>
                 {
-                    builder.RegisterType(viewModelType).UsingConstructor(typeof(IMessenger), typeof(SynchronizationContext)).InstancePerDependency().OnActivated(vm => ((BaseViewModel)vm.Instance).OnInstanceActivated())
-                        .OnActivating(vm => ((BaseViewModel)vm.Instance).OnInstanceActivating());
+                    builder.RegisterType(viewModelType).UsingConstructor(typeof(IMessenger), typeof(SynchronizationContext)).InstancePerDependency()
+                        .OnActivated(vm => ((BaseViewModel)vm.Instance).OnInstanceActivated()).OnActivating(vm => ((BaseViewModel)vm.Instance).OnInstanceActivating());
                 });
             // build container and assign instance
             Variables.AutoFacContainer = builder.Build();

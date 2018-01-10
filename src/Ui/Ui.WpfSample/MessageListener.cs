@@ -6,7 +6,6 @@
 
     using Enumerations;
 
-    
     using Messages;
 
     using Models.Messages;

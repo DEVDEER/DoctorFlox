@@ -6,13 +6,12 @@
     using System.Runtime.CompilerServices;
     using System.Threading;
 
-    
     using Commands;
 
     using DoctorFlox.Enumerations;
 
-    using Enumerations;
     using Interfaces;
+
     using Messages;
 
     using Models;

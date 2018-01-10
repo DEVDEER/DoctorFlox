@@ -5,8 +5,8 @@
     using System.Threading;
     using System.Windows;
 
-    
     using Commands;
+
     using Interfaces;
 
     /// <summary>

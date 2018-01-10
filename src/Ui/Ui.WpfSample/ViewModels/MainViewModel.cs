@@ -100,7 +100,7 @@
                         windowInstance?.Show();
                     }
                 });
-            TestAsyncMessengerCommand = new RelayCommand(RunAsyncMessengerTest, () => !IsProgressOperationRunning);
+            TestAsyncMessengerCommand = new RelayCommand(RunAsyncMessengerSample, () => !IsProgressOperationRunning);
         }
 
         /// <inheritdoc />
@@ -151,7 +151,7 @@
         /// <remarks>
         /// See the <see cref="InitMessenger" /> method for the message registration.
         /// </remarks>
-        private void RunAsyncMessengerTest()
+        private void RunAsyncMessengerSample()
         {
             Progress = 0;
             Task.Run(

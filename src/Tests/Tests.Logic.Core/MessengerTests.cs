@@ -25,7 +25,7 @@
         /// </summary>
         [TestMethod]
         public async Task MessengerDataMessageTest()
-        {
+        {            
             // arrange
             var messageWithValue = new DataMessage<object, object, int>(10);
             var messageWithValeAndSender = new DataMessage<object, object, string>(this, "10");
@@ -35,46 +35,50 @@
             var messageWithAllHandled = false;
             var handled = 0;
             // act
-            Messenger.Default.Register<DataMessage<object, object, int>>(
-                this,
-                ThreadCallbackOption.ThreadPool,
-                msg =>
+            TestHandler.RunInWpfSyncContext(
+                async () =>
                 {
-                    if (msg.Data == 10 && msg.Sender == null && msg.Target == null)
+                    Messenger.Default.Register<DataMessage<object, object, int>>(
+                        this,
+                        ThreadCallbackOption.ThreadPool,
+                        msg =>
+                        {
+                            if (msg.Data == 10 && msg.Sender == null && msg.Target == null)
+                            {
+                                messageWithValueHandled = true;
+                            }
+                            Interlocked.Increment(ref handled);
+                        });
+                    Messenger.Default.Register<DataMessage<object, object, string>>(
+                        this,
+                        ThreadCallbackOption.ThreadPool,
+                        msg =>
+                        {
+                            if (msg.Sender == this && msg.Target == null && (msg.Data?.Equals("10") ?? false))
+                            {
+                                messageWithValeAndSenderHandled = true;
+                            }
+                            Interlocked.Increment(ref handled);
+                        });
+                    Messenger.Default.Register<DataMessage<object, object, double>>(
+                        this,
+                        ThreadCallbackOption.ThreadPool,
+                        msg =>
+                        {
+                            if (msg.Sender == this && msg.Target == this && msg.Data.Equals(10))
+                            {
+                                messageWithAllHandled = true;
+                            }
+                            Interlocked.Increment(ref handled);
+                        });
+                    Messenger.Default.Send(messageWithValue);
+                    Messenger.Default.Send(messageWithValeAndSender);
+                    Messenger.Default.Send(messageWithAll);
+                    while (handled < 3)
                     {
-                        messageWithValueHandled = true;
+                        await Task.Delay(10);
                     }
-                    Interlocked.Increment(ref handled);
                 });
-            Messenger.Default.Register<DataMessage<object, object, string>>(
-                this,
-                ThreadCallbackOption.ThreadPool,
-                msg =>
-                {
-                    if (msg.Sender == this && msg.Target == null && (msg.Data?.Equals("10") ?? false))
-                    {
-                        messageWithValeAndSenderHandled = true;
-                    }
-                    Interlocked.Increment(ref handled);
-                });
-            Messenger.Default.Register<DataMessage<object, object, double>>(
-                this,
-                ThreadCallbackOption.ThreadPool,
-                msg =>
-                {
-                    if (msg.Sender == this && msg.Target == this && msg.Data.Equals(10))
-                    {
-                        messageWithAllHandled = true;
-                    }
-                    Interlocked.Increment(ref handled);
-                });
-            Messenger.Default.Send(messageWithValue);
-            Messenger.Default.Send(messageWithValeAndSender);
-            Messenger.Default.Send(messageWithAll);
-            while (handled < 3)
-            {
-                await Task.Delay(10);
-            }
             // assert
             Assert.IsTrue(messageWithValueHandled, "Message with int value only not handled correctly.");
             Assert.IsTrue(messageWithValeAndSenderHandled, "Message string value and sender not handled correctly.");
@@ -82,7 +86,25 @@
         }
 
         /// <summary>
-        /// Tetss if the
+        /// Tests if the <see cref="Messenger.Reset" /> method will force the messenger to be re-instantiated.
+        /// </summary>
+        [TestMethod]
+        public void MessengerResetTest()
+        {            
+            // arrange
+            var firstMessenger = Messenger.Default;
+            var secondMessenger = Messenger.Default;
+            // act
+            Messenger.Reset();
+            var thirdMessenger = Messenger.Default;
+            // assert
+            Assert.AreEqual(firstMessenger, secondMessenger);
+            Assert.AreNotEqual(firstMessenger, thirdMessenger);            
+        }
+
+    
+        /// <summary>
+        /// Tests if the
         /// <see cref="Messenger.Register{TMessage}(object,devdeer.DoctorFlox.Enumerations.ThreadCallbackOption,System.Action{TMessage})" />
         /// operates on the expected thread.
         /// </summary>
@@ -96,7 +118,7 @@
             var senderThreadOk = false;
             var threadPoolThreadOk = false;
             var uiThreadOk = false;
-            // act
+            // act            
             TestHandler.RunInWpfSyncContext(
                 async () =>
                 {
@@ -134,7 +156,7 @@
                     {
                         await Task.Delay(10);
                     }
-                });
+                });            
             // assert
             Assert.IsTrue(senderThreadOk, "Message is not consumed on sender thread.");
             Assert.IsTrue(threadPoolThreadOk, "Message is not consumed on thread-pool-thread.");

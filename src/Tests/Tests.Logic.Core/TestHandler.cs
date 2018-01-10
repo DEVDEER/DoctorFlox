@@ -47,8 +47,8 @@
             var oldContext = SynchronizationContext.Current;
             try
             {
-                var syncCtx = new DispatcherSynchronizationContext();
-                SynchronizationContext.SetSynchronizationContext(syncCtx);
+                var dispatcherContext = new DispatcherSynchronizationContext();
+                SynchronizationContext.SetSynchronizationContext(dispatcherContext);
                 var task = function();
                 if (task == null)
                 {

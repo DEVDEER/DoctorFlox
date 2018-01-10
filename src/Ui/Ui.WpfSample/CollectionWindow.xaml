@@ -5,8 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:devdeer.DoctorFlox.Ui.WpfSample"
         mc:Ignorable="d"
-        Title="CollectionWindow" Height="300" Width="600" 
-        DataContext="{Binding CollectionViewModel, Source={StaticResource Locator}}" WindowStartupLocation="CenterScreen">
+        Title="CollectionWindow" Height="300" Width="600"
+        DataContext="{Binding CollectionViewModel, Source={StaticResource Locator}}"
+        WindowStartupLocation="CenterScreen">
     <Grid>
         <DataGrid ItemsSource="{Binding ItemsView}" IsSynchronizedWithCurrentItem="True" />
     </Grid>

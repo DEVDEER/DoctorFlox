@@ -4,14 +4,12 @@
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
 
-    
-
     using Resources;
 
     using ViewModels;
 
     /// <summary>
-    /// A wrapper for the data used in the <see cref="ChildViewModel"/>.
+    /// A wrapper for the data used in the <see cref="ChildViewModel" />.
     /// </summary>
     public class ChildDataModel : BaseDataModel
     {

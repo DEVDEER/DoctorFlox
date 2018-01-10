@@ -6,7 +6,7 @@
         xmlns:mvvm="clr-namespace:devdeer.DoctorFlox;assembly=DoctorFlox.Logic.Core"
         xmlns:local="clr-namespace:devdeer.DoctorFlox.Ui.WpfSample"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-        xmlns:Commands="clr-namespace:devdeer.DoctorFlox.Commands;assembly=DoctorFlox.Logic.Core"        
+        xmlns:Commands="clr-namespace:devdeer.DoctorFlox.Commands;assembly=DoctorFlox.Logic.Core"
         mc:Ignorable="d"
         Title="{Binding Caption}"
         Height="470"
@@ -107,7 +107,8 @@
                 </TextBlock>
                 <ProgressBar Grid.Row="1" Value="{Binding Progress, Mode=OneWay}"
                              Visibility="{Binding IsProgressOperationRunning, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                <CheckBox Grid.Row="2" Content="Enforce property changed" IsChecked="{Binding EnforceRaisePropertyChanged}" />
+                <CheckBox Grid.Row="2" Content="Enforce property changed"
+                          IsChecked="{Binding EnforceRaisePropertyChanged}" />
                 <Button Grid.Row="3" Content="Run Async Action" Command="{Binding TestAsyncMessengerCommand}" />
             </Grid>
         </GroupBox>

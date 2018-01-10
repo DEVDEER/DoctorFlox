@@ -1,11 +1,11 @@
 ﻿<Application x:Class="devdeer.DoctorFlox.Ui.WpfSample.App"
-                xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                xmlns:d="http://schemas.microsoft.com/expression/blend/2008" d1p1:Ignorable="d"
-                xmlns:d1p1="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                xmlns:Helpers="clr-namespace:devdeer.DoctorFlox.Ui.WpfSample.Helpers"
-                xmlns:WpfSample="clr-namespace:devdeer.DoctorFlox.Ui.WpfSample"
-                StartupUri="MainWindow.xaml">
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" d1p1:Ignorable="d"
+             xmlns:d1p1="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:Helpers="clr-namespace:devdeer.DoctorFlox.Ui.WpfSample.Helpers"
+             xmlns:WpfSample="clr-namespace:devdeer.DoctorFlox.Ui.WpfSample"
+             StartupUri="MainWindow.xaml">
     <Application.Resources>
         <Helpers:ViewModelLocator x:Key="Locator" d:IsDataSource="True" />
         <WpfSample:MessageListener x:Key="MessageListener" x:Shared="True" />
@@ -23,7 +23,8 @@
         <Style TargetType="TextBox">
             <Setter Property="Margin" Value="0 2" />
             <Setter Property="MinHeight" Value="26" />
-            <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)/ErrorContent}"/>
+            <Setter Property="ToolTip"
+                    Value="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)/ErrorContent}" />
         </Style>
         <Style TargetType="Label">
             <Setter Property="VerticalAlignment" Value="Center" />

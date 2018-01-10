@@ -5,8 +5,6 @@
 
     using Autofac;
 
-    
-
     using ViewModels;
 
     /// <summary>

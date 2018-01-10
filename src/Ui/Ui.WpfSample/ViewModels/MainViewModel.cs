@@ -9,17 +9,16 @@
 
     using Autofac;
 
-    using Enumerations;
-
-    using Helpers;
-
-    
     using Commands;
 
     using DoctorFlox.Enumerations;
 
     using Enumerations;
+
+    using Helpers;
+
     using Interfaces;
+
     using Messages;
 
     using Models.Messages;
@@ -147,10 +146,10 @@
         }
 
         /// <summary>
-        /// Starts a task which will post a <see cref="DataMessage{TSender,TTarget,TData}"/> on a new threadpool-thread.
+        /// Starts a task which will post a <see cref="DataMessage{TSender,TTarget,TData}" /> on a new threadpool-thread.
         /// </summary>
         /// <remarks>
-        /// See the <see cref="InitMessenger"/> method for the message registration.
+        /// See the <see cref="InitMessenger" /> method for the message registration.
         /// </remarks>
         private void RunAsyncMessengerTest()
         {

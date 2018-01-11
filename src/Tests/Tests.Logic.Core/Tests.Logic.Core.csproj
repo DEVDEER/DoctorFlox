@@ -61,6 +61,7 @@
     <Compile Include="Tests\BaseClasses\BaseObservableObjectTests.cs" />
     <Compile Include="Tests\BaseClasses\BaseTest.cs" />
     <Compile Include="Extensions\TestDataModelExtensions.cs" />
+    <Compile Include="Tests\Extensions\ValidationAttributeExtensionsTests.cs" />
     <Compile Include="Tests\MessengerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tests\AttributeCheckers\RangeAttributeCheckerTests.cs" />

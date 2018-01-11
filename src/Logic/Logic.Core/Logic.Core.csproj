@@ -6,11 +6,11 @@
     <DebugType>Full</DebugType>
     <RootNamespace>devdeer.DoctorFlox</RootNamespace>
     <PackageId>devdeer.DoctorFlox</PackageId>
-    <PackageVersion>0.3.1-beta</PackageVersion>
+    <PackageVersion>1.0.0</PackageVersion>
     <Authors>DEVDEER</Authors>
     <Description>An Open Source MVVM framework for .NET Framework.</Description>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <PackageReleaseNotes>Messenger.Register will fire exception when UI thread is forced and no synchronization context is provided.</PackageReleaseNotes>
+    <PackageReleaseNotes>First stable version.</PackageReleaseNotes>
     <Copyright>Copyright 2017-2018 (c) DEVDEER</Copyright>
     <PackageProjectUrl>https://github.com/devdeer/DoctorFlox</PackageProjectUrl>
     <PackageIconUrl>https://devdeer.blob.core.windows.net/shared/doctorflox/doctorflox_64.png</PackageIconUrl>

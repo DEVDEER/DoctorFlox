@@ -38,8 +38,19 @@
             {
                 throw new InvalidOperationException("Resource type could not be used.");
             }
-            // try to return the resource based text            
-            return manager.GetString(attribute.ErrorMessageResourceName);
+            // try to return the resource based text     
+            try
+            {
+                return manager.GetString(attribute.ErrorMessageResourceName);
+            }
+            catch (MissingManifestResourceException misEx)
+            {
+                throw new InvalidOperationException("No resources found for the given type.", misEx);
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException("Unkown excpetion while trying to resolve error message.", ex);
+            }            
         }
 
         #endregion

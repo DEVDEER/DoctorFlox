@@ -7,6 +7,8 @@
 
     using BaseClasses;
 
+    using Core.Extensions;
+
     using devdeer.DoctorFlox.Helpers.Validation;
 
     using Extensions;

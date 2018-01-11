@@ -1,0 +1,7 @@
+﻿ExpectedFirstnameValid,ExpectedFirstnameErrorMessageKey,ExpectedLastnameValid,ExpectedLastnameErrorMessageKey,Firstname,Lastname
+true,NULL,true,NULL,NULL,NULL
+true,NULL,true,NULL,"",""
+true,NULL,true,NULL,"K","M"
+true,NULL,true,NULL,"Klaus","Mustermann"
+false,"MaxLengthErrorMessage",true,NULL,"KlausKlausKlausKlausKlaus1KlausKlausKlausKlausKlaus1","Mustermann"
+false,"MaxLengthErrorMessage",false,"MaxLengthErrorMessage","KlausKlausKlausKlausKlaus1KlausKlausKlausKlausKlaus1","MustermannMustermannMustermannMustermannMustermann1"

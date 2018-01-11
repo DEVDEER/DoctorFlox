@@ -1,4 +1,4 @@
-﻿namespace deveer.DoctorFlox.Tests.Logic.Core
+﻿namespace deveer.DoctorFlox.Tests.Logic.Core.Tests.BaseClasses
 {
     using System;
     using System.Data;

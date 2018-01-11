@@ -1,4 +1,4 @@
-﻿namespace deveer.DoctorFlox.Tests.Logic.Core
+﻿namespace deveer.DoctorFlox.Tests.Logic.Core.Tests
 {
     using System;
     using System.Diagnostics.CodeAnalysis;

@@ -1,14 +1,13 @@
-﻿namespace deveer.DoctorFlox.Tests.Logic.Core
+﻿namespace deveer.DoctorFlox.Tests.Logic.Core.Tests.AttributeCheckers
 {
     using System;
-    using System.CodeDom;
-    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
 
+    using BaseClasses;
+
     using devdeer.DoctorFlox.Helpers.Validation;
-    using devdeer.DoctorFlox.Models;
 
     using Extensions;
 
@@ -17,25 +16,25 @@
     using TestModels;
 
     /// <summary>
-    /// Contains unit tests for the type <see cref="MinLengthAttributeChecker" />.
+    /// Contains unit tests for the type <see cref="RequiredAttributeChecker" />.
     /// </summary>
     [TestClass]
     [ExcludeFromCodeCoverage]
-    public class MinLengthAttributeCheckerTests : BaseTest
+    public class RequiredAttributeCheckerTests : BaseTest
     {
         #region methods
 
         /// <summary>
-        /// Checks if the <see cref="MinLengthAttributeChecker.InternalCheck"/> method reacts as expected.
+        /// Checks if the <see cref="RequiredAttributeChecker.InternalCheck" /> method reacts as expected.
         /// </summary>
         [TestMethod]
-        [DeploymentItem(@"DataSources\MinLengthAttributeCheckerInternalCheckTest.csv")]
-        [DataSource(@"Microsoft.VisualStudio.TestTools.DataSource.CSV", "MinLengthAttributeCheckerInternalCheckTest", "MinLengthAttributeCheckerInternalCheckTest#csv", DataAccessMethod.Sequential)]
-        public void MinLengthAttributeCheckerInternalCheckTest()
+        [DeploymentItem(@"DataSources\RequiredAttributeCheckerInternalCheckTest.csv")]
+        [DataSource(@"Microsoft.VisualStudio.TestTools.DataSource.CSV", "RequiredAttributeCheckerInternalCheckTest", "RequiredAttributeCheckerInternalCheckTest#csv", DataAccessMethod.Sequential)]
+        public void RequiredAttributeCheckerInternalCheckTest()
         {
             // arrange
             var expectedFirstnameValid = GetConvertedTestValueAsBool(0) ?? throw new ApplicationException("Could not retrieve expected value.");
-            var expectedFirstnameErrorMessageKey  = GetConvertedTestValueAsString(1);
+            var expectedFirstnameErrorMessageKey = GetConvertedTestValueAsString(1);
             var expectedLastnameValid = GetConvertedTestValueAsBool(2) ?? throw new ApplicationException("Could not retrieve expected value.");
             var expectedLastnameErrorMessageKey = GetConvertedTestValueAsString(3);
             var expectedFirstnameErrorMessage = string.IsNullOrEmpty(expectedFirstnameErrorMessageKey) ? string.Empty : TestResources.ResourceManager.GetString(expectedFirstnameErrorMessageKey);
@@ -43,11 +42,12 @@
             var item = new TestDataModel
             {
                 Firstname = GetConvertedTestValueAsString(4),
-                Lastname = GetConvertedTestValueAsString(5)                
+                Lastname = GetConvertedTestValueAsString(5),
+                Birthday = GetConvertedTestValueAsDateTime(6)
             };
-            var checker = new MinLengthAttributeChecker();
-            var firstNameAttribute = item.GetAttribute<MinLengthAttribute>(nameof(TestDataModel.Firstname));
-            var lastNameAttribute = item.GetAttribute<MinLengthAttribute>(nameof(TestDataModel.Lastname));
+            var checker = new RequiredAttributeChecker();
+            var firstNameAttribute = item.GetAttribute<RequiredAttribute>(nameof(TestDataModel.Firstname));
+            var lastNameAttribute = item.GetAttribute<RequiredAttribute>(nameof(TestDataModel.Lastname));
             // act 
             var resultFirstname = checker.Check(firstNameAttribute, item.Firstname);
             var resultLastname = checker.Check(lastNameAttribute, item.Lastname);

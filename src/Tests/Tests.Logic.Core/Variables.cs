@@ -20,8 +20,14 @@
         /// </summary>
         public const int MinStringLengthInTestModels = 1;
 
+        /// <summary>
+        /// The maximum salary used for tests.
+        /// </summary>
         public const int SalaryMaxValue = 100000;
 
+        /// <summary>
+        /// The minimum salary used for tests.
+        /// </summary>
         public const int SalaryMinValue = 1000;
 
         #endregion

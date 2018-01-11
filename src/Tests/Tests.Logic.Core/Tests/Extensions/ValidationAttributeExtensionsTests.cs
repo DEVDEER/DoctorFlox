@@ -22,8 +22,8 @@
         /// Checks if an <see cref="InvalidOperationException" /> is thrown when the ResourceType is invalid.
         /// </summary>
         [TestMethod]
-        [ExpectedException(typeof(InvalidOperationException))]
-        public void ResolveErrorMessageExceptionTest()
+        [ExpectedException(typeof(InvalidOperationException), "Expected exception not thrown.", AllowDerivedTypes = false)]
+        public void ValidationAttributeExtensionsResolveErrorMessageExceptionTest()
         {
             var attribute = new MaxLengthAttribute(10)
             {
@@ -38,7 +38,7 @@
         /// from resources.
         /// </summary>
         [TestMethod]
-        public void ResolveErrorMessageTest()
+        public void ValidationAttributeExtensionsResolveErrorMessageTest()
         {
             // arrange
             var expectedResourceMessage = TestResources.MaxLengthErrorMessage;
@@ -50,12 +50,12 @@
             };
             // act && assert
             var currentMessage = attribute.ResolveErrorMessage();
-            Assert.AreEqual(expectedResourceMessage, currentMessage);
+            Assert.AreEqual(expectedResourceMessage, currentMessage, "Expected error message does not match when resource is used.");
             attribute.ErrorMessage = expectedStaticMessage;
             currentMessage = attribute.ResolveErrorMessage();
-            Assert.AreEqual(expectedStaticMessage, currentMessage);
+            Assert.AreEqual(expectedStaticMessage, currentMessage, "Expected error message does not match when direct message is used.");
             attribute = new MaxLengthAttribute(10);
-            Assert.IsNull(attribute.ResolveErrorMessage());
+            Assert.IsNull(attribute.ResolveErrorMessage(), "Result error message is not null.");
         }
 
         #endregion

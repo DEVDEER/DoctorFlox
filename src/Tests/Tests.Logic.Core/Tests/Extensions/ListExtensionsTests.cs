@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
 
@@ -18,7 +17,7 @@
     public class ListExtensionsTests
     {
         #region methods
-        
+
         /// <summary>
         /// Tests if <see cref="ListExtensions.Merge{T}" /> resolves error messages correctly
         /// from resources.

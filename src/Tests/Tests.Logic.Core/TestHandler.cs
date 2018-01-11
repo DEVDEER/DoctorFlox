@@ -2,6 +2,7 @@
 {
     using System;
     using System.Linq;
+    using System.Reflection;
     using System.Threading;
     using System.Threading.Tasks;
     using System.Windows.Threading;
@@ -18,6 +19,27 @@
     {
         #region methods
 
+        /// <summary>
+        /// Can be used to perform assertion on a property that is not public.
+        /// </summary>
+        /// <typeparam name="TItem">The type of the <paramref name="instance" />.</typeparam>
+        /// <typeparam name="TValue">The type of the <paramref name="expectedValue" />.</typeparam>
+        /// <param name="instance">The instance to test.</param>
+        /// <param name="propertyName">The name of the property.</param>
+        /// <param name="expectedValue">The expected value in the <paramref name="instance" />.</param>
+        /// <param name="assertErrorMessage">An optional error message for assertion-fail.</param>
+        public static void AssertNonPublicProperty<TItem, TValue>(TItem instance, string propertyName, TValue expectedValue, string assertErrorMessage = "Expected value not present.")
+        {
+            var type = typeof(TItem);
+            var property = type.GetProperty(propertyName, BindingFlags.NonPublic | BindingFlags.Instance);
+            if (property == null)
+            {
+                throw new InvalidOperationException($"Cannot find property {propertyName} on type {type.Name}");
+            }
+            var actualValue = property.GetValue(instance);
+            Assert.AreEqual(expectedValue, actualValue, assertErrorMessage);
+        }
+        
         /// <summary>
         /// Is called before any of the tests in this assembly will execute.
         /// </summary>

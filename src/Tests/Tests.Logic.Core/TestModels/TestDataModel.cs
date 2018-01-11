@@ -33,7 +33,7 @@
         /// </summary>
         [Required(ErrorMessageResourceType = typeof(TestResources), ErrorMessageResourceName = "RequiredErrorMessage")]
         [MinLength(Variables.MinStringLengthInTestModels, ErrorMessageResourceType = typeof(TestResources), ErrorMessageResourceName = "MinLengthErrorMessage")]
-        [MaxLength(Variables.MaxStringLengthInTestModels, ErrorMessageResourceType = typeof(TestResources), ErrorMessageResourceName = "MaxLengthErrorMessage")]        
+        [MaxLength(Variables.MaxStringLengthInTestModels, ErrorMessageResourceType = typeof(TestResources), ErrorMessageResourceName = "MaxLengthErrorMessage")]
         [StringLength(
             Variables.MaxStringLengthInTestModels,
             MinimumLength = Variables.MinStringLengthInTestModels,

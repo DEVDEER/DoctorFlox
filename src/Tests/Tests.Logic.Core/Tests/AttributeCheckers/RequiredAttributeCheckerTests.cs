@@ -5,13 +5,11 @@
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
 
-    using BaseClasses;
+    using BaseTypes;
 
     using Core.Extensions;
 
     using devdeer.DoctorFlox.Helpers.Validation;
-
-    using Extensions;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 

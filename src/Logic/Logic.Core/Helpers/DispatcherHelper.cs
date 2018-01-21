@@ -80,6 +80,16 @@
         }
 
         /// <summary>
+        /// Invokes a <paramref name="action" /> on the <see cref="UiDispatcher" /> synchronously.
+        /// </summary>
+        /// <param name="action">The action to invoke on the UI thread.</param>
+        public static void Invoke(Action action)
+        {
+            CheckDispatcher();
+            UiDispatcher.Invoke(action);
+        }
+
+        /// <summary>
         /// Calls <see cref="BeginInvoke" /> and retrieves the underlaying awaitable.
         /// </summary>
         /// <param name="action">The action to invoke on the UI thread.</param>

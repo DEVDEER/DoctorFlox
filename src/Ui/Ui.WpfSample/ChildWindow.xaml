@@ -8,9 +8,9 @@
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:Commands="clr-namespace:devdeer.DoctorFlox.Commands;assembly=DoctorFlox.Logic.Core"
         mc:Ignorable="d"
-        Title="Bind Tests" Height="250" Width="300"
+        Title="Bind Tests" Height="300" Width="300" MinHeight="300" MinWidth="300"
         DataContext="{Binding ChildViewModel, Source={StaticResource Locator}}" ResizeMode="NoResize"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen" ShowInTaskbar="False">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Closing">
             <Commands:EventToCommand Command="{Binding WindowClosingCommand}" PassEventArgsToCommand="True" />
@@ -26,22 +26,32 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <Label Grid.Row="0" Grid.Column="0" Content="Firstname:" />
-        <TextBox Grid.Row="0" Grid.Column="1" Name="txtFirstname"
+        <Label Grid.Row="0" Grid.Column="0" Content="Message:" />
+        <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding MainViewMessage}" />
+        <Label Grid.Row="1" Grid.Column="0" Content="Firstname:" />
+        <TextBox Grid.Row="1" Grid.Column="1" Name="txtFirstname"
                  Text="{Binding Data.Firstname, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True }" />
-        <Label Grid.Row="1" Grid.Column="0" Content="Lastname:" />
-        <TextBox Grid.Row="1" Grid.Column="1" Name="txtLastname"
+        <Label Grid.Row="2" Grid.Column="0" Content="Lastname:" />
+        <TextBox Grid.Row="2" Grid.Column="1" Name="txtLastname"
                  Text="{Binding Data.Lastname, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True }" />
-        <Label Grid.Row="2" Grid.Column="0" Content="Age:" />
-        <TextBox Grid.Row="2" Grid.Column="1" Name="txtAge"
+        <Label Grid.Row="3" Grid.Column="0" Content="Age:" />
+        <TextBox Grid.Row="3" Grid.Column="1" Name="txtAge"
                  Text="{Binding Data.Age, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True }" />
-        <TextBlock Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" TextWrapping="Wrap" Style="{DynamicResource Hint}">
+        <Label Grid.Row="4" Grid.Column="0" Content="Group:" />
+        <DockPanel  Grid.Row="4" Grid.Column="1" LastChildFill="True">
+            <Button DockPanel.Dock="Right" Content="..." Command="{Binding SelectGroupCommand}" />
+            <TextBlock DockPanel.Dock="Left"
+                Text="{Binding Data.Group.Label, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True }" />
+        </DockPanel>
+        <TextBlock Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Style="{DynamicResource Hint}">
             This dialog shows command binding and error validation using an inner type that inherits from BaseDataModel. If you click "Rebind" a complete new
             instance of a BaseDataModel is assigned to the bound input fields showing that validation still works then.
         </TextBlock>
-        <StackPanel Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal"
+        <StackPanel Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal"
                     HorizontalAlignment="Right" VerticalAlignment="Bottom">
             <Button Content="Rebind" Command="{Binding RebindCommand}" Style="{DynamicResource HorizontalSideButton}" />
             <Button Content="OK" Command="{Binding OkCommand}" Style="{DynamicResource HorizontalButton}" />

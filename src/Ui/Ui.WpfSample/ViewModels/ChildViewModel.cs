@@ -22,7 +22,7 @@
     public class ChildViewModel : BaseDataModelViewModel<ChildDataModel>
     {
         #region constructors and destructors
-      
+
         /// <inheritdoc />
         public ChildViewModel()
         {
@@ -74,7 +74,7 @@
         public override void OnInstanceActivated()
         {
             base.OnInstanceActivated();
-            TraceMethodName();            
+            TraceMethodName();
         }
 
         /// <inheritdoc />
@@ -111,6 +111,11 @@
                         Lastname = "Last",
                         Age = 20
                     }));
+            SelectGroupCommand = new RelayCommand(
+                () =>
+                {
+                    Data.Group = GetResultFromCollectionViewModel<PickGroupViewModel, GroupDataModel, GroupDataModel>("PickGroupWindow", e => e.CurrentItem, Data.Group, Data.Group);
+                });
             OkCommand = new RelayCommand(() => ShowMessageBox("OK"), () => IsOk);
             CancelCommand = new RelayCommand(CloseWindow);
         }
@@ -132,7 +137,7 @@
                 ThreadCallbackOption.UiThread,
                 m =>
                 {
-                    ShowMessageBox($"Message from main view: {m.Data}.");
+                    MainViewMessage = m.Data;
                 });
         }
 
@@ -165,6 +170,11 @@
         public override bool EnforceRaisePropertyChanged { get; set; } = true;
 
         /// <summary>
+        /// Is populated by registering a certain message from the main view model.
+        /// </summary>
+        public string MainViewMessage { get; set; }
+
+        /// <summary>
         /// Defines the logic for the OK-button.
         /// </summary>
         public RelayCommand OkCommand { get; private set; }
@@ -173,6 +183,8 @@
         /// Sets the Data property to a new value.
         /// </summary>
         public RelayCommand RebindCommand { get; private set; }
+
+        public RelayCommand SelectGroupCommand { get; private set; }
 
         #endregion
     }

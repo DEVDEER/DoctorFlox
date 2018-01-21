@@ -307,19 +307,23 @@
         /// <param name="view">The view to apply.</param>
         private void SetItemsView(ListCollectionView view)
         {
-            DispatcherHelper.BeginInvoke(() => ItemsView = view);
-            // inform about the change
-            ItemsViewChanged?.Invoke(this, EventArgs.Empty);
-            if (ItemsView == null)
-            {
-                // very strange because it indicates that GetDefaultView could not be casted to ListCollectionView
-                return;
-            }
-            // ensure that the CurrentItem property will notify about the fact that the view changed it's current item
-            ItemsView.CurrentChanged += (s, e) =>
-            {
-                OnPropertyChanged(nameof(CurrentItem));
-            };
+            DispatcherHelper.Invoke(
+                () =>
+                {
+                    ItemsView = view;
+                    // inform about the change
+                    ItemsViewChanged?.Invoke(this, EventArgs.Empty);
+                    if (ItemsView == null)
+                    {
+                        // very strange because it indicates that GetDefaultView could not be casted to ListCollectionView
+                        return;
+                    }
+                    // ensure that the CurrentItem property will notify about the fact that the view changed it's current item
+                    ItemsView.CurrentChanged += (s, e) =>
+                    {
+                        OnPropertyChanged(nameof(CurrentItem));
+                    };
+                });
         }
 
         #endregion
@@ -338,8 +342,12 @@
         {
             get
             {
+                if (ItemsView == null)
+                {
+                    return default;
+                }
                 var result = default(TItem);
-                DispatcherHelper.BeginInvoke(
+                DispatcherHelper.Invoke(
                     () =>
                     {
                         result = (TItem)ItemsView.CurrentItem;
@@ -348,10 +356,15 @@
             }
             set
             {
+                if (ItemsView == null)
+                {
+                    return;
+                }
                 DispatcherHelper.BeginInvoke(
                     () =>
                     {
-                        ItemsView.MoveCurrentTo(value);
+                        var item = Items.SingleOrDefault(i => i.Equals(value));
+                        ItemsView.MoveCurrentTo(item);
                         OnPropertyChanged();
                     });
             }

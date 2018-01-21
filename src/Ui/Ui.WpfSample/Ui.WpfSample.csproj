@@ -24,6 +24,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -33,6 +34,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -70,9 +72,13 @@
     <Compile Include="Helpers\ViewModelLocator.cs" />
     <Compile Include="MessageListener.cs" />
     <Compile Include="Models\ChildDataModel.cs" />
+    <Compile Include="Models\GroupDataModel.cs" />
     <Compile Include="Models\Messages\WindowOpenRequestMessage.cs" />
     <Compile Include="MultiWindow.xaml.cs">
       <DependentUpon>MultiWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PickGroupWindow.xaml.cs">
+      <DependentUpon>PickGroupWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Resources\Default.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -83,6 +89,7 @@
     <Compile Include="ViewModels\CollectionViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\MultiViewModel.cs" />
+    <Compile Include="ViewModels\PickGroupViewModel.cs" />
     <Page Include="ChildWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -104,6 +111,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="MultiWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PickGroupWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

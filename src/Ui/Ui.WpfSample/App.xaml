@@ -29,6 +29,9 @@
         <Style TargetType="Label">
             <Setter Property="VerticalAlignment" Value="Center" />
         </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
         <Style TargetType="TextBlock" x:Key="Hint">
             <Setter Property="Foreground" Value="CadetBlue" />
             <Setter Property="FontSize" Value="10" />

@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="CollectionWindow" Height="300" Width="600"
         DataContext="{Binding CollectionViewModel, Source={StaticResource Locator}}"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen" ShowInTaskbar="False">
     <Grid>
         <DataGrid ItemsSource="{Binding ItemsView}" IsSynchronizedWithCurrentItem="True" />
     </Grid>

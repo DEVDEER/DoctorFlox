@@ -21,6 +21,7 @@
 
     using Messages;
 
+    using Models;
     using Models.Messages;
 
     /// <summary>
@@ -76,9 +77,17 @@
                         MessengerInstance.Send(new WindowOpenRequestMessage(WindowType.ChildWindow));
                         return;
                     }
-                    var windowInstance = CreateWindowInstance("ChildWindow");
-                    MessengerInstance.Send(new DataMessage<MainViewModel, ChildViewModel, string>(this, "Hello World!"));
-                    windowInstance?.ShowDialog();
+                    var windowInstance = CreateDataModelWindowInstance(
+                        "ChildWindow",
+                        true,
+                        AssociatedView,
+                        new ChildDataModel
+                        {
+                            Firstname = "First",
+                            Lastname = "Last"
+                        }) as ChildWindow;
+                    MessengerInstance.Send(new DataMessage<MainViewModel, ChildViewModel, string>(this, "Hello from Main!"));
+                    windowInstance?.ShowDialog();                                                            
                 });
             OpenCollectionWindowCommand = new RelayCommand(
                 () =>
@@ -88,7 +97,7 @@
                         MessengerInstance.Send(new WindowOpenRequestMessage(WindowType.CollectionWindow));
                         return;
                     }
-                    var windowInstance = CreateWindowInstance("CollectionWindow");
+                    var windowInstance = CreateWindowInstance("CollectionWindow", true, AssociatedView);
                     windowInstance?.ShowDialog();
                 });
             OpenMultiWindowCommand = new RelayCommand(
@@ -96,7 +105,7 @@
                 {
                     for (var i = 0; i < 3; i++)
                     {
-                        var windowInstance = CreateWindowInstance("MultiWindow");
+                        var windowInstance = CreateWindowInstance("MultiWindow", true, AssociatedView);
                         windowInstance?.Show();
                     }
                 });

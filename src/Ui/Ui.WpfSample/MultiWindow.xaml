@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:devdeer.DoctorFlox.Ui.WpfSample"
         mc:Ignorable="d"
         Title="MultiWindow" Height="109" Width="160" ResizeMode="NoResize"
-        DataContext="{Binding MultiViewModel, Source={StaticResource Locator}}">
+        DataContext="{Binding MultiViewModel, Source={StaticResource Locator}}" ShowInTaskbar="False">
     <StackPanel>
         <Label Content="Window Id:" />
         <TextBlock Text="{Binding WindowHashCode}" />

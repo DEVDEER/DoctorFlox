@@ -6,15 +6,23 @@
     <DebugType>Full</DebugType>
     <RootNamespace>devdeer.DoctorFlox</RootNamespace>
     <PackageId>devdeer.DoctorFlox</PackageId>
-    <PackageVersion>1.0.1</PackageVersion>
+    <PackageVersion>1.1.0</PackageVersion>
     <Authors>DEVDEER</Authors>
     <Description>An Open Source MVVM framework for .NET Framework.</Description>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <PackageReleaseNotes>Bugfix on memory leak because of error in Messenger.Unregister method.</PackageReleaseNotes>
+    <PackageReleaseNotes>Added BaseDataModelViewModel and implemented new method to pick values from other collection view.</PackageReleaseNotes>
     <Copyright>Copyright 2017-2018 (c) DEVDEER</Copyright>
     <PackageProjectUrl>https://github.com/devdeer/DoctorFlox</PackageProjectUrl>
     <PackageIconUrl>https://devdeer.blob.core.windows.net/shared/doctorflox/doctorflox_64.png</PackageIconUrl>
     <PackageTags>DEVDEER,MVVM,WPF,.NET</PackageTags>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>

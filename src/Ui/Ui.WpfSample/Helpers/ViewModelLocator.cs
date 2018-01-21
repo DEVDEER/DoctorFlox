@@ -34,6 +34,11 @@
         /// </summary>
         public MultiViewModel MultiViewModel => BaseViewModel.IsInDesignModeStatic ? new MultiViewModel() : Variables.AutoFacContainer.Resolve<MultiViewModel>();
 
+        /// <summary>
+        /// The view model for the group picker.
+        /// </summary>
+        public PickGroupViewModel PickGroupViewModel => BaseViewModel.IsInDesignModeStatic ? new PickGroupViewModel() : Variables.AutoFacContainer.Resolve<PickGroupViewModel>();
+
         #endregion
     }
 }

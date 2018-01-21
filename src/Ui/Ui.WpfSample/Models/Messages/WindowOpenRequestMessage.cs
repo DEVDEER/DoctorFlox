@@ -14,7 +14,7 @@
     {
         #region constructors and destructors
 
-        public WindowOpenRequestMessage(WindowType data) : base(data)
+        public WindowOpenRequestMessage(WindowType windowType) : base(windowType)
         {
         }
 

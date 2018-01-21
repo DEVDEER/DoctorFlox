@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Linq;
+    using System.Linq.Expressions;
     using System.Threading;
     using System.Windows;
 
@@ -72,8 +73,8 @@
         public BaseViewModel(IMessenger messenger, SynchronizationContext synchronizationContext)
         {
             _messenger = messenger;
-            PerformConstructorCalls();
             SyncContext = synchronizationContext;
+            PerformConstructorCalls();
         }
 
         #endregion
@@ -95,6 +96,64 @@
         #endregion
 
         #region methods
+
+        /// <summary>
+        /// Can be used to retrieve a result by opening another collection view and getting it's selected data.
+        /// </summary>
+        /// <typeparam name="TViewModel">
+        /// The type of view model the other view has (must be of
+        /// <see cref="BaseCollectionViewModel{TItem}" />).
+        /// </typeparam>
+        /// <typeparam name="TItem">The type of item the <typeparamref name="TViewModel" /> holds.</typeparam>
+        /// <typeparam name="TResult">The type of the expected result.</typeparam>
+        /// <param name="viewTypeName">The name or full name of the type we are searching for.</param>
+        /// <param name="resultFunc">
+        /// A resolver that indicates how the <typeparamref name="TResult" /> should be retrieved from the
+        /// <typeparamref name="TViewModel" />.
+        /// </param>
+        /// <param name="preSelectItem">The currently selected item which should be preselected.</param>
+        /// <param name="defaultResult">
+        /// A result that should be selected in case the new form is aborted or some other error occurs
+        /// (see <paramref name="throwException" />!).
+        /// </param>
+        /// <param name="throwException"><c>true</c> if this method should throw exceptions (defaults to <c>true</c>).</param>
+        /// <param name="owner">The handle for the owner window.</param>
+        /// <returns>The result identified by <paramref name="resultFunc" /> or the <paramref name="defaultResult" />.</returns>
+        public TResult GetResultFromCollectionViewModel<TViewModel, TItem, TResult>(
+            string viewTypeName,
+            Expression<Func<TViewModel, TResult>> resultFunc,
+            TItem preSelectItem = default,
+            TResult defaultResult = default,
+            bool throwException = true,
+            Window owner = null)
+            where TItem : INotifyPropertyChanged where TViewModel : BaseCollectionViewModel<TItem>
+        {
+            var instance = CreateWindowInstance(viewTypeName, throwException, owner);
+            if (instance == null)
+            {
+                if (throwException)
+                {
+                    throw new ArgumentException(nameof(viewTypeName), $"Could not find type '{viewTypeName}'.");
+                }
+                return defaultResult;
+            }
+            if (!(instance.DataContext is BaseCollectionViewModel<TItem> context))
+            {
+                if (throwException)
+                {
+                    throw new ArgumentException(nameof(viewTypeName), "Provided windows data context is not of type BaseCollectionViewModel<TItem>.");
+                }
+                return defaultResult;
+            }
+            // we have to set the passed data to the view model
+            context.CurrentItem = preSelectItem;
+            instance.ShowDialog();
+            if (instance.DialogResult ?? false)
+            {
+                return resultFunc.Compile().Invoke(context as TViewModel);
+            }
+            return defaultResult;
+        }
 
         /// <summary>
         /// Should be called from outside to signal that a new instance was attached.
@@ -160,7 +219,57 @@
         /// </summary>
         protected void CloseWindow()
         {
+            CloseWindow(null);
+        }
+
+        /// <summary>
+        /// Can be used to close the window which holds the data context to this type.
+        /// </summary>
+        /// <param name="dialogResult">
+        /// The dialog result which should be passed to the <see cref="AssociatedView" /> before it's
+        /// closed.
+        /// </param>
+        protected void CloseWindow(bool? dialogResult)
+        {
+            AssociatedView.DialogResult = dialogResult;
             AssociatedView?.Close();
+        }
+
+        /// <summary>
+        /// Uses <see cref="ReflectionHelper.ViewTypeListFactory" /> to search for a type with the given
+        /// <paramref name="viewTypeName" /> and
+        /// retrieve an instance of it and initializing it's data with <paramref name="data" /> assuming
+        /// that it's type is derived from <see cref="BaseDataModelViewModel{TDataModel}" />.
+        /// </summary>
+        /// <typeparam name="TDataModel">The type of the data property in the associated view model.</typeparam>
+        /// <param name="viewTypeName">The name or full name of the type we are searching for.</param>
+        /// <param name="throwException"><c>true</c> if this method should throw exceptions (defaults to <c>true</c>).</param>
+        /// <param name="owner">The handle for the owner window.</param>
+        /// <param name="data">The data to pass to the resulting view model of the type.</param>
+        /// <returns>The window instance or <c>null</c> if an error occurs.</returns>
+        protected Window CreateDataModelWindowInstance<TDataModel>(string viewTypeName, bool throwException = true, Window owner = null, TDataModel data = null)
+            where TDataModel : BaseDataModel
+        {
+            var instance = CreateWindowInstance(viewTypeName, throwException, owner);
+            if (instance == null)
+            {
+                if (throwException)
+                {
+                    throw new ArgumentException(nameof(viewTypeName), $"Could not find type '{viewTypeName}'.");
+                }
+                return null;
+            }
+            if (!(instance.DataContext is BaseDataModelViewModel<TDataModel> context))
+            {
+                if (throwException)
+                {
+                    throw new ArgumentException(nameof(viewTypeName), "Provided windows data context is not of type BaseDataModelViewModel<TDataModel>.");
+                }
+                return null;
+            }
+            // we have to set the passed data to the view model
+            context.UpdateData(data);
+            return instance;
         }
 
         /// <summary>
@@ -184,7 +293,9 @@
             }
             try
             {
-                return WindowInstanceResolver.Invoke(viewType);
+                var window = WindowInstanceResolver.Invoke(viewType);
+                window.Owner = owner;
+                return window;
             }
             catch (Exception ex)
             {
@@ -319,7 +430,7 @@
             if (EnforceRaisePropertyChanged)
             {
                 // We want to check all command execution states again.
-                Commands.ToList().ForEach(c => c.RaiseCanExecuteChanged());
+                Commands.ToList().ForEach(c => c?.RaiseCanExecuteChanged());
             }
         }
 
@@ -351,6 +462,7 @@
                 InitMessenger();
                 InitData();
             }
+            IsInitialized = true;
         }
 
         #endregion
@@ -362,9 +474,8 @@
         /// </summary>
         /// <remarks>
         /// This logic tries to find any <see cref="ViewTypeNameAttribute" /> which this type is decorated with. If none is found
-        /// this logic
-        /// assumes that the naming conventions says that view models are using the string 'ViewModel' in their name where views
-        /// will use 'Window'.
+        /// this logic assumes that the naming conventions says that view models are using the string 'ViewModel' in their
+        /// name where views will use 'Window'.
         /// </remarks>
         public Window AssociatedView
         {
@@ -386,7 +497,7 @@
         /// Indicates if <see cref="BaseRelayCommand.RaiseCanExecuteChanged" /> should be called for each command
         /// after one of the properties of this instances has changed.
         /// </summary>
-        public bool EnforceRaisePropertyChanged { get; set; } = false;
+        public virtual bool EnforceRaisePropertyChanged { get; set; } = false;
 
         /// <summary>
         /// The unique id of this instance.
@@ -419,6 +530,11 @@
         /// Will call <see cref="OnWindowClosing" />.
         /// </remarks>
         public RelayCommand WindowClosingCommand { get; private set; }
+
+        /// <summary>
+        /// Indicates if <see cref="PerformConstructorCalls" /> is passed completely.
+        /// </summary>
+        protected bool IsInitialized { get; private set; }
 
         /// <summary>
         /// A messenger passed in by DI or the default one.

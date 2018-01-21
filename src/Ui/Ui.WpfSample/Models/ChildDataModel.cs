@@ -29,12 +29,18 @@
         public string Firstname { get; set; }
 
         /// <summary>
+        /// The associated group.
+        /// </summary>
+        public GroupDataModel Group { get; set; }
+
+        /// <summary>
         /// The last name.
         /// </summary>
         [Required(ErrorMessage = "This last name is required.")]
         [MaxLength(20, ErrorMessage = "20 characters are allowed in max.")]
         public string Lastname { get; set; }
 
+        /// <inheritdoc />
         protected override bool CollapseInnerDataErrors => false;
 
         #endregion

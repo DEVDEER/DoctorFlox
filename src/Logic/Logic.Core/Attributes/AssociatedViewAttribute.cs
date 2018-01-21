@@ -82,7 +82,7 @@
             }
             set
             {
-                if (_viewTypeName.Equals(value, StringComparison.Ordinal))
+                if (_viewTypeName != null && _viewTypeName.Equals(value, StringComparison.Ordinal))
                 {
                     return;
                 }

@@ -124,7 +124,7 @@
         /// <inheritdoc />
         public virtual void Unregister(object recipient)
         {
-            UnregisterFromLists(recipient, _derivedRegistrations);
+            UnregisterFromLists(recipient, _onlyDirectRegistrations);
             UnregisterFromLists(recipient, _derivedRegistrations);
         }
 

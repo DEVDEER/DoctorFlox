@@ -1,4 +1,4 @@
-﻿namespace devdeer.DoctorFlox.Ui.WpfSample.Enumerations
+﻿namespace devdeer.DoctorFlox.Logic.WpfSample.Enumerations
 {
     using System;
     using System.Linq;

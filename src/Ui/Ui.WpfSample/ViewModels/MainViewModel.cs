@@ -11,13 +11,13 @@
 
     using Commands;
 
-    using DoctorFlox.Enumerations;
-
     using Enumerations;
 
     using Helpers;
 
     using Interfaces;
+
+    using Logic.WpfSample.Enumerations;
 
     using Messages;
 
@@ -87,7 +87,7 @@
                             Lastname = "Last"
                         }) as ChildWindow;
                     MessengerInstance.Send(new DataMessage<MainViewModel, ChildViewModel, string>(this, "Hello from Main!"));
-                    windowInstance?.ShowDialog();                                                            
+                    windowInstance?.ShowDialog();
                 });
             OpenCollectionWindowCommand = new RelayCommand(
                 () =>

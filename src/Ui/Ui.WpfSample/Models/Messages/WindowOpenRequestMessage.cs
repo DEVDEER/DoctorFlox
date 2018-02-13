@@ -5,7 +5,7 @@
 
     using DoctorFlox.Messages;
 
-    using Enumerations;
+    using Logic.WpfSample.Enumerations;
 
     /// <summary>
     /// Is sent by a view model to signal that it wants to open a certain window.

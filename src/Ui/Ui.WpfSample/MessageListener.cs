@@ -4,7 +4,7 @@
     using System.Linq;
     using System.Windows;
 
-    using Enumerations;
+    using Logic.WpfSample.Enumerations;
 
     using Messages;
 
@@ -43,7 +43,7 @@
                     window = new ChildWindow();
                     break;
                 case WindowType.CollectionWindow:
-                    window = new ChildWindow();
+                    window = new CollectionWindow();
                     break;
             }
             if (window == null)

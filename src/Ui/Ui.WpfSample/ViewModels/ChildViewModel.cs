@@ -113,7 +113,7 @@
                     }));
             SelectGroupCommand = new RelayCommand(
                 () =>
-                {
+                {                    
                     Data.Group = GetResultFromCollectionViewModel<PickGroupViewModel, GroupDataModel, GroupDataModel>("PickGroupWindow", e => e.CurrentItem, Data.Group, Data.Group);
                 });
             OkCommand = new RelayCommand(() => ShowMessageBox("OK"), () => IsOk);

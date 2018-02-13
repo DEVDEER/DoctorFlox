@@ -1,4 +1,4 @@
-﻿namespace devdeer.DoctorFlox.Ui.WpfSample.Models.Messages
+﻿namespace devdeer.DoctorFlox.Logic.WpfSample.Models.Messages
 {
     using System;
     using System.Linq;

@@ -4,11 +4,10 @@
     using System.Linq;
     using System.Windows;
 
-    using Enumerations;
+    using Logic.WpfSample.Enumerations;
+    using Logic.WpfSample.Models.Messages;
 
     using Messages;
-
-    using Models.Messages;
 
     /// <summary>
     /// Central logic that hooks into messenger messages for the UI.
@@ -43,7 +42,7 @@
                     window = new ChildWindow();
                     break;
                 case WindowType.CollectionWindow:
-                    window = new ChildWindow();
+                    window = new CollectionWindow();
                     break;
             }
             if (window == null)

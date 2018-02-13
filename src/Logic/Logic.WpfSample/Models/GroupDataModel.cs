@@ -1,10 +1,10 @@
-﻿namespace devdeer.DoctorFlox.Ui.WpfSample.Models
+﻿namespace devdeer.DoctorFlox.Logic.WpfSample.Models
 {
     using System;
     using System.Linq;
 
     /// <summary>
-    /// A wrapper for the data used in the <see cref="PickGroupWindow" />.
+    /// A wrapper for the data used in the PickGroupWindow.
     /// </summary>
     public class GroupDataModel : BaseDataModel
 

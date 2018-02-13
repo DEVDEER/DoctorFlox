@@ -1,7 +1,6 @@
-﻿namespace devdeer.DoctorFlox.Ui.WpfSample.ViewModels
+﻿namespace devdeer.DoctorFlox.Logic.WpfSample.ViewModels
 {
     using System;
-    using System.Collections.Generic;
     using System.Linq;
     using System.Threading;
 
@@ -40,13 +39,6 @@
         #region methods
 
         /// <inheritdoc />
-        protected override void InitData()
-        {
-            base.InitData();
-            InitItems(Variables.Groups);
-        }
-
-        /// <inheritdoc />
         protected override void InitCommands()
         {
             base.InitCommands();
@@ -54,15 +46,26 @@
             CancelCommand = new RelayCommand(CloseWindow);
         }
 
-        /// <summary>
-        /// Defines the logic for the OK-button.
-        /// </summary>
-        public RelayCommand OkCommand { get; private set; }
+        /// <inheritdoc />
+        protected override void InitData()
+        {
+            base.InitData();
+            InitItems(Variables.Groups);
+        }
+
+        #endregion
+
+        #region properties
 
         /// <summary>
         /// Closes the associated window.
         /// </summary>
         public RelayCommand CancelCommand { get; private set; }
+
+        /// <summary>
+        /// Defines the logic for the OK-button.
+        /// </summary>
+        public RelayCommand OkCommand { get; private set; }
 
         #endregion
     }

@@ -8,13 +8,14 @@
 
     using Autofac;
 
-    using DoctorFlox.Helpers;
-
     using Helpers;
 
     using Interfaces;
 
     using Locators;
+
+    using Logic.WpfSample.Helpers;
+    using Logic.WpfSample.ViewModels;
 
     using Messages;
 
@@ -38,7 +39,7 @@
                     builder.RegisterType(windowType).InstancePerDependency();
                 });
             // register all view models
-            Assembly.GetExecutingAssembly().GetTypes().Where(t => !t.IsAbstract && t.IsPublic && typeof(BaseViewModel).IsAssignableFrom(t)).ToList().ForEach(
+            typeof(MainViewModel).Assembly.GetTypes().Where(t => !t.IsAbstract && t.IsPublic && typeof(BaseViewModel).IsAssignableFrom(t)).ToList().ForEach(
                 viewModelType =>
                 {
                     builder.RegisterType(viewModelType).UsingConstructor(typeof(IMessenger), typeof(SynchronizationContext)).InstancePerDependency()

@@ -20,7 +20,7 @@
     /// won't be called if the instance does not change but the data in it. Use <see cref="PropertyChanged" /> in this case.
     /// </remarks>
     public abstract class BaseDataModelViewModel<TDataModel> : BaseViewModel
-        where TDataModel : BaseDataModel
+        where TDataModel : BaseDataModel, new()
     {
         #region member vars
 
@@ -134,7 +134,7 @@
         /// </remarks>
         public TDataModel Data
         {
-            get => _data;
+            get => _data ?? (_data = new TDataModel());
             private set
             {
                 if (Data == value)

@@ -165,6 +165,10 @@
       <Project>{f3a458ed-2858-4916-b108-3bbee752c5f8}</Project>
       <Name>Logic.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Logic\Logic.WpfSample\Logic.WpfSample.csproj">
+      <Project>{72d74399-c5ae-4cd3-a6ca-b61017d2c3f4}</Project>
+      <Name>Logic.WpfSample</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

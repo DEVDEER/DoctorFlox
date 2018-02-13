@@ -1,4 +1,4 @@
-﻿namespace devdeer.DoctorFlox.Ui.WpfSample.Helpers
+﻿namespace devdeer.DoctorFlox.Logic.WpfSample.Helpers
 {
     using System;
     using System.Collections.Generic;
@@ -11,7 +11,7 @@
     /// <summary>
     /// Provides access to global variables in this assembly.
     /// </summary>
-    internal static class Variables
+    public static class Variables
     {
         #region properties
 

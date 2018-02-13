@@ -67,29 +67,13 @@
     <Compile Include="CollectionWindow.xaml.cs">
       <DependentUpon>CollectionWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Enumerations\WindowType.cs" />
-    <Compile Include="Helpers\Variables.cs" />
-    <Compile Include="Helpers\ViewModelLocator.cs" />
     <Compile Include="MessageListener.cs" />
-    <Compile Include="Models\ChildDataModel.cs" />
-    <Compile Include="Models\GroupDataModel.cs" />
-    <Compile Include="Models\Messages\WindowOpenRequestMessage.cs" />
     <Compile Include="MultiWindow.xaml.cs">
       <DependentUpon>MultiWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="PickGroupWindow.xaml.cs">
       <DependentUpon>PickGroupWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Resources\Default.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Default.resx</DependentUpon>
-    </Compile>
-    <Compile Include="ViewModels\ChildViewModel.cs" />
-    <Compile Include="ViewModels\CollectionViewModel.cs" />
-    <Compile Include="ViewModels\MainViewModel.cs" />
-    <Compile Include="ViewModels\MultiViewModel.cs" />
-    <Compile Include="ViewModels\PickGroupViewModel.cs" />
     <Page Include="ChildWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -137,10 +121,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Default.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Default.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -164,6 +144,10 @@
     <ProjectReference Include="..\..\Logic\Logic.Core\Logic.Core.csproj">
       <Project>{f3a458ed-2858-4916-b108-3bbee752c5f8}</Project>
       <Name>Logic.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Logic\Logic.WpfSample\Logic.WpfSample.csproj">
+      <Project>{72d74399-c5ae-4cd3-a6ca-b61017d2c3f4}</Project>
+      <Name>Logic.WpfSample</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

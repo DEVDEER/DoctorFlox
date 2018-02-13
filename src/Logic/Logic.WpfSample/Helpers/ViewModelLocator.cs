@@ -1,4 +1,4 @@
-﻿namespace devdeer.DoctorFlox.Ui.WpfSample.Helpers
+﻿namespace devdeer.DoctorFlox.Logic.WpfSample.Helpers
 {
     using System;
     using System.Linq;

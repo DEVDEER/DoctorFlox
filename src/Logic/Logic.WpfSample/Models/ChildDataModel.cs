@@ -1,4 +1,4 @@
-﻿namespace devdeer.DoctorFlox.Ui.WpfSample.Models
+﻿namespace devdeer.DoctorFlox.Logic.WpfSample.Models
 {
     using System;
     using System.ComponentModel.DataAnnotations;

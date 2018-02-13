@@ -248,7 +248,7 @@
         /// <param name="data">The data to pass to the resulting view model of the type.</param>
         /// <returns>The window instance or <c>null</c> if an error occurs.</returns>
         protected Window CreateDataModelWindowInstance<TDataModel>(string viewTypeName, bool throwException = true, Window owner = null, TDataModel data = null)
-            where TDataModel : BaseDataModel
+            where TDataModel : BaseDataModel, new()
         {
             var instance = CreateWindowInstance(viewTypeName, throwException, owner);
             if (instance == null)

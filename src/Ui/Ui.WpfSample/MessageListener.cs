@@ -5,10 +5,9 @@
     using System.Windows;
 
     using Logic.WpfSample.Enumerations;
+    using Logic.WpfSample.Models.Messages;
 
     using Messages;
-
-    using Models.Messages;
 
     /// <summary>
     /// Central logic that hooks into messenger messages for the UI.

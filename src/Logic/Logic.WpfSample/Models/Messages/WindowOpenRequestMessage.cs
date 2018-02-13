@@ -1,11 +1,11 @@
-﻿namespace devdeer.DoctorFlox.Ui.WpfSample.Models.Messages
+﻿namespace devdeer.DoctorFlox.Logic.WpfSample.Models.Messages
 {
     using System;
     using System.Linq;
 
     using DoctorFlox.Messages;
 
-    using Logic.WpfSample.Enumerations;
+    using Enumerations;
 
     /// <summary>
     /// Is sent by a view model to signal that it wants to open a certain window.

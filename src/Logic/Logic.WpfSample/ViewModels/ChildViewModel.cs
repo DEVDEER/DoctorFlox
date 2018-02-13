@@ -1,4 +1,4 @@
-﻿namespace devdeer.DoctorFlox.Ui.WpfSample.ViewModels
+﻿namespace devdeer.DoctorFlox.Logic.WpfSample.ViewModels
 {
     using System;
     using System.Diagnostics;
@@ -113,7 +113,7 @@
                     }));
             SelectGroupCommand = new RelayCommand(
                 () =>
-                {                    
+                {
                     Data.Group = GetResultFromCollectionViewModel<PickGroupViewModel, GroupDataModel, GroupDataModel>("PickGroupWindow", e => e.CurrentItem, Data.Group, Data.Group);
                 });
             OkCommand = new RelayCommand(() => ShowMessageBox("OK"), () => IsOk);

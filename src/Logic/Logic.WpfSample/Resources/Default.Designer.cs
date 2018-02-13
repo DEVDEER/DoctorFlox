@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace devdeer.DoctorFlox.Ui.WpfSample.Resources {
+namespace devdeer.DoctorFlox.Logic.WpfSample.Resources {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace devdeer.DoctorFlox.Ui.WpfSample.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("devdeer.DoctorFlox.Ui.WpfSample.Resources.Default", typeof(Default).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("devdeer.DoctorFlox.Logic.WpfSample.Resources.Default", typeof(Default).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

@@ -1,4 +1,4 @@
-﻿namespace devdeer.DoctorFlox.Ui.WpfSample.ViewModels
+﻿namespace devdeer.DoctorFlox.Logic.WpfSample.ViewModels
 {
     using System;
     using System.Diagnostics;
@@ -11,13 +11,13 @@
 
     using Commands;
 
+    using DoctorFlox.Enumerations;
+
     using Enumerations;
 
     using Helpers;
 
     using Interfaces;
-
-    using Logic.WpfSample.Enumerations;
 
     using Messages;
 
@@ -85,7 +85,7 @@
                         {
                             Firstname = "First",
                             Lastname = "Last"
-                        }) as ChildWindow;
+                        });
                     MessengerInstance.Send(new DataMessage<MainViewModel, ChildViewModel, string>(this, "Hello from Main!"));
                     windowInstance?.ShowDialog();
                 });

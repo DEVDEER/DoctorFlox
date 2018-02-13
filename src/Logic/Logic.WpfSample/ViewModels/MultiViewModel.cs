@@ -1,4 +1,4 @@
-﻿namespace devdeer.DoctorFlox.Ui.WpfSample.ViewModels
+﻿namespace devdeer.DoctorFlox.Logic.WpfSample.ViewModels
 {
     using System;
     using System.Linq;

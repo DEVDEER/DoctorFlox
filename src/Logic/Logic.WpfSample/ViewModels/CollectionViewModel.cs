@@ -7,6 +7,8 @@
 
     using Attributes;
 
+    using DoctorFlox.Interfaces;
+
     using Interfaces;
 
     using Models;

@@ -26,6 +26,11 @@
         /// <summary>
         /// The <see cref="CollectionWindow" />.
         /// </summary>
-        CollectionWindow = 3
+        CollectionWindow = 3,
+
+        /// <summary>
+        /// The <see cref="FlightCollectionWindow" />.
+        /// </summary>
+        FlightCollectionWindow = 4
     }
 }

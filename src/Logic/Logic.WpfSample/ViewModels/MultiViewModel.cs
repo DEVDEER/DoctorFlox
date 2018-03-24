@@ -7,6 +7,8 @@
 
     using Commands;
 
+    using DoctorFlox.Interfaces;
+
     using Interfaces;
 
     /// <summary>

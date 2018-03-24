@@ -6,6 +6,8 @@
 
     using Commands;
 
+    using DoctorFlox.Interfaces;
+
     using Helpers;
 
     using Interfaces;

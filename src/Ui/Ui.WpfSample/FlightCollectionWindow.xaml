@@ -1,0 +1,54 @@
+﻿<Window x:Class="devdeer.DoctorFlox.Ui.WpfSample.FlightCollectionWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:devdeer.DoctorFlox.Ui.WpfSample"
+        mc:Ignorable="d"
+        Title="CollectionWindow" Height="300" Width="770.122"
+        DataContext="{Binding FlightCollectionViewModel, Source={StaticResource Locator}}"
+        WindowStartupLocation="CenterScreen" ShowInTaskbar="False">
+    <DockPanel LastChildFill="True">
+        <ToolBar DockPanel.Dock="Top">
+            <Label Content="Latitude:" />
+            <TextBox Text="{Binding Lat, Mode = TwoWay, UpdateSourceTrigger=LostFocus}" Width="100" IsEnabled="{Binding IsNotLoading}" />
+            <Label Content="Longitude:" />
+            <TextBox Text="{Binding Lon, Mode = TwoWay, UpdateSourceTrigger=LostFocus}" Width="100" IsEnabled="{Binding IsNotLoading}" />
+            <Separator />
+            <Button Content="Refresh" Command="{Binding RefreshCommand}" />
+            <Separator />
+            <CheckBox Content="Auto Refresh" IsChecked="{Binding EnableAutoRefresh, Mode=TwoWay}" />
+            <TextBox Text="{Binding AutoRefreshSeconds, Mode = TwoWay, UpdateSourceTrigger=LostFocus}" Width="30" IsEnabled="{Binding EnableAutoRefresh}" />
+            <Label Content="Seconds" />
+            <Separator />
+        </ToolBar>
+        <StatusBar DockPanel.Dock="Bottom">
+            <StatusBar.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="100" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="100" />
+                        </Grid.ColumnDefinitions>
+                    </Grid>
+                </ItemsPanelTemplate>
+            </StatusBar.ItemsPanel>
+            <StatusBarItem Grid.Column="0">
+                <Label Content="{Binding Status}" />
+            </StatusBarItem>
+            <Separator Grid.Column="1" />
+            <StatusBarItem Grid.Column="2">
+                <Label Content="{Binding ItemsView.Count}" />
+            </StatusBarItem>
+            <Separator Grid.Column="3" />
+            <StatusBarItem Grid.Column="4">
+                <Label Content="{Binding LastRefreshTime, Mode=OneWay, StringFormat=\{0:G\}}" />
+            </StatusBarItem>
+        </StatusBar>
+        <DataGrid ItemsSource="{Binding ItemsView}" IsSynchronizedWithCurrentItem="True" IsReadOnly="True" DockPanel.Dock="Left" />
+    </DockPanel>
+</Window>
+

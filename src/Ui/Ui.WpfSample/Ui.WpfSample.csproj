@@ -67,6 +67,9 @@
     <Compile Include="CollectionWindow.xaml.cs">
       <DependentUpon>CollectionWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="FlightCollectionWindow.xaml.cs">
+      <DependentUpon>FlightCollectionWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MessageListener.cs" />
     <Compile Include="MultiWindow.xaml.cs">
       <DependentUpon>MultiWindow.xaml</DependentUpon>
@@ -79,6 +82,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CollectionWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="FlightCollectionWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

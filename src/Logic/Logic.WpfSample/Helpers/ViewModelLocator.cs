@@ -6,7 +6,6 @@
     using Autofac;
 
     using DataServices;
-
     using ViewModels;
 
     /// <summary>

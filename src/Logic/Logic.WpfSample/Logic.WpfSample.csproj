@@ -55,6 +55,10 @@
     <Compile Include="Models\FlightDataModel.cs" />
     <Compile Include="Models\FlightFeedModel.cs" />
     <Compile Include="Models\FlightServiceResultModel.cs" />
+    <Compile Include="Enumerations\WindowType.cs" />
+    <Compile Include="Helpers\Variables.cs" />
+    <Compile Include="Helpers\ViewModelLocator.cs" />
+    <Compile Include="Models\ChildDataModel.cs" />
     <Compile Include="Models\GroupDataModel.cs" />
     <Compile Include="Models\Messages\WindowOpenRequestMessage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

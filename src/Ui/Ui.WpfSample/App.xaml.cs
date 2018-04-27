@@ -18,6 +18,7 @@
     using Logic.WpfSample.DataServices;
     using Logic.WpfSample.Helpers;
     using Logic.WpfSample.Interfaces;
+    using Logic.WpfSample.Helpers;
     using Logic.WpfSample.ViewModels;
 
     using Messages;
@@ -42,8 +43,8 @@
                 windowType =>
                 {
                     builder.RegisterType(windowType).InstancePerDependency();
-                });
-            // register all basic view models
+                });            
+            // register all view models
             typeof(MainViewModel).Assembly.GetTypes().Where(t => !t.IsAbstract && t.IsPublic && typeof(BaseViewModel).IsAssignableFrom(t)).ToList().ForEach(
                 viewModelType =>
                 {

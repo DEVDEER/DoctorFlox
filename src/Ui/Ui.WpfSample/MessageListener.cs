@@ -44,6 +44,9 @@
                 case WindowType.CollectionWindow:
                     window = new CollectionWindow();
                     break;
+                case WindowType.FlightCollectionWindow:
+                    window = new FlightCollectionWindow();
+                    break;
             }
             if (window == null)
             {

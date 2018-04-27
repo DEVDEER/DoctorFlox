@@ -5,6 +5,7 @@
 
     using Autofac;
 
+    using DataServices;
     using ViewModels;
 
     /// <summary>
@@ -23,6 +24,12 @@
         /// The view model for the list window.
         /// </summary>
         public CollectionViewModel CollectionViewModel => BaseViewModel.IsInDesignModeStatic ? new CollectionViewModel() : Variables.AutoFacContainer.Resolve<CollectionViewModel>();
+
+        /// <summary>
+        /// The view model for the flight list window.
+        /// </summary>
+        public FlightCollectionViewModel FlightCollectionViewModel =>
+            BaseViewModel.IsInDesignModeStatic ? new FlightCollectionViewModel(new DesignTimeFlightDataService()) : Variables.AutoFacContainer.Resolve<FlightCollectionViewModel>();
 
         /// <summary>
         /// The view model for the main window.

@@ -112,5 +112,17 @@
                 <Button Grid.Row="3" Content="Run Async Action" Command="{Binding TestAsyncMessengerCommand}" />
             </Grid>
         </GroupBox>
+        <GroupBox Grid.Row="1" Grid.Column="2" Header="Data Service Sample">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0">
+                    
+                </TextBlock>
+                <Button Grid.Row="1" Content="Open Sample" Command="{Binding OpenFlightCollectionWindowCommand}" />
+            </Grid>
+        </GroupBox>
     </Grid>
 </Window>

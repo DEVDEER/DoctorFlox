@@ -12,6 +12,7 @@
     using Commands;
 
     using DoctorFlox.Enumerations;
+    using DoctorFlox.Interfaces;
 
     using Enumerations;
 
@@ -98,6 +99,17 @@
                         return;
                     }
                     var windowInstance = CreateWindowInstance("CollectionWindow", true, AssociatedView);
+                    windowInstance?.ShowDialog();
+                });
+            OpenFlightCollectionWindowCommand = new RelayCommand(
+                () =>
+                {
+                    if (UseMessengerForWindowActions)
+                    {
+                        MessengerInstance.Send(new WindowOpenRequestMessage(WindowType.FlightCollectionWindow));
+                        return;
+                    }
+                    var windowInstance = CreateWindowInstance("FlightCollectionWindow", true, AssociatedView);
                     windowInstance?.ShowDialog();
                 });
             OpenMultiWindowCommand = new RelayCommand(
@@ -202,6 +214,11 @@
         /// Triggers the opening of a new collection window.
         /// </summary>
         public RelayCommand OpenCollectionWindowCommand { get; private set; }
+
+        /// <summary>
+        /// Triggers the opening of the flight collection view..
+        /// </summary>
+        public RelayCommand OpenFlightCollectionWindowCommand { get; private set; }
 
         /// <summary>
         /// Triggers the opening 3 different multi-windows at once.

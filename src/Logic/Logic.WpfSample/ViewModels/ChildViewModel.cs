@@ -9,6 +9,7 @@
     using Commands;
 
     using DoctorFlox.Enumerations;
+    using DoctorFlox.Interfaces;
 
     using Interfaces;
 
